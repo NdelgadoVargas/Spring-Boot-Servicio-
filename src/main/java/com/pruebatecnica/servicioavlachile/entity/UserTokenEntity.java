@@ -3,6 +3,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,45 +12,46 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity()
-@Table(name = "phones")
-public class PhoneEntity {
-
+@Table(name = "user_token")
+public class UserTokenEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private long id;
 
     @Column()
-    private String number;
+    private String token;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
-    //  Getters
-     public long getId() {
+
+    
+    public long getId() {
         return id;
     }
 
-    public String getNumber() {
-        return number;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public UserEntity getUser() {
         return user;
     }
 
-    // Setters
-    public void setId(long id) {
-        this.id = id;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public void setNumber(String phone) {
-        this.number = phone;
-    }
-
-    public void setUser(UserEntity id_users) {
-        this.user = id_users;
-    }
 }
+
