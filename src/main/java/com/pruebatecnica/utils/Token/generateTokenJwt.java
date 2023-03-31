@@ -4,9 +4,9 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 
-public class PersistToken {
+public class generateTokenJwt {
     
-    public String generateToke(String email, String password){
+    public String generateToken(String email, String password){
 
         SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
         String token = Jwts.builder()

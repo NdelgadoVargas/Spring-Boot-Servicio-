@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.SearchUserResponse;
+import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.servicioavlachile.services.UserService;
-import com.pruebatecnica.utils.Token.PersistToken;
+import com.pruebatecnica.utils.Token.generateTokenJwt;
 import com.pruebatecnica.utils.message.Message;
+import com.pruebatecnica.utils.message.MessageException;
 import com.pruebatecnica.utils.validation.Validation;
 import jakarta.transaction.Transactional;
 
@@ -43,7 +45,7 @@ public class userController {
 
         try {
             Validation validation = new Validation();
-            PersistToken Encript = new PersistToken();
+            generateTokenJwt Encript = new generateTokenJwt();
 
             if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
                 return new ResponseEntity<>(
@@ -70,7 +72,7 @@ public class userController {
 
             if (newUser != null) {
 
-                String token = Encript.generateToke(newUser.getEmail(),newUser.getPassword());
+                String token = Encript.generateToken(newUser.getEmail(),newUser.getPassword());
 
                 UserTokenEntity userToken = new UserTokenEntity();
                 userToken.setToken(token);
@@ -102,19 +104,17 @@ public class userController {
 
         try {
 
-            String tokenValue = token.replaceFirst("Bearer ", "");
-            UserTokenEntity userToken = userTokenRepository.findByToken(tokenValue);
-            if (userToken == null) {
-                return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id);
+
+            if(validationTokenUser.getStatus() != HttpStatus.OK ){
+                return new ResponseEntity<>(new SearchUserResponse(
+                validationTokenUser.getMessage(), 
+                validationTokenUser.getUser(), 
+                validationTokenUser.getStatus()),
+                validationTokenUser.getStatus());
             }
-
-            UserEntity dataUser = userService.getUser(id);
-
-            if(dataUser == null){
-                return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
-            }
-
-            return new ResponseEntity<>(new SearchUserResponse( Message.USER_FOUND_SUCCESS, dataUser, HttpStatus.OK), HttpStatus.OK);
+           
+            return new ResponseEntity<>(new SearchUserResponse( validationTokenUser.getMessage(), validationTokenUser.getUser(),  validationTokenUser.getStatus()),  validationTokenUser.getStatus());
 
         } catch (Exception e) {
             return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -123,26 +123,31 @@ public class userController {
     }
 
 
-
     // DELETE DELETE
     // @DeleteMapping("/delete/{id}")
     // public ResponseEntity<SearchUserResponse> deleteUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
 
     //     try {
 
-    //         String tokenValue = token.replaceFirst("Bearer ", "");
-    //         UserTokenEntity userToken = userTokenRepository.findByToken(tokenValue);
+    //         UserEntity userToken = userService.getUserFromToken(token);
+
     //         if (userToken == null) {
     //             return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
     //         }
 
-    //         UserEntity dataUser = userService.deleteUser(id);
+    //         UserEntity getUser = userService.getUser(id);
 
-    //         if(dataUser == null){
-    //             return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+    //         if (userToken.getId() != getUser.getId()) {
+    //             throw new MessageException(Message.ERROR_INVALID_TOKEN);
     //         }
+            
+    //         Boolean deleteUser = userService.deleteUser(id);
+    //         System.out.println(deleteUser);
+            // if(dataUser == null){
+            //     return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+            // }
 
-    //         return new ResponseEntity<>(new SearchUserResponse( Message.USER_FOUND_SUCCESS, dataUser, HttpStatus.OK), HttpStatus.OK);
+    //         return new ResponseEntity<>(new SearchUserResponse( Message.USER_FOUND_SUCCESS, null, HttpStatus.OK), HttpStatus.OK);
 
     //     } catch (Exception e) {
     //         return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
