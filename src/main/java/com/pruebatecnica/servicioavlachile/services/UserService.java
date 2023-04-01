@@ -10,8 +10,9 @@ import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.utils.message.Message;
-import com.pruebatecnica.utils.message.MessageException;
 
+import aj.org.objectweb.asm.Type;
+import ch.qos.logback.core.joran.action.Action;
 import jakarta.transaction.Transactional;
 
 
@@ -54,39 +55,52 @@ public class UserService {
     }
 
 
-    public ValidationTokenUserResponse getUserFromToken(String token,int id) {
-        // RETORNAR UN MENSAJE ERROR - RETORNAR DATA DE USER - HTTP STATUS
+    public ValidationTokenUserResponse getUserFromToken(String token,int id, String action) {
         
         try {
             
             String tokenValue = token.replaceFirst("Bearer ", "");
             UserTokenEntity userToken = userTokenRepository.findByToken(tokenValue);
     
-            UserEntity dataUser = userRepository.findById(id).orElse(null);
+            UserEntity user = userRepository.findById(id).orElse(null);
     
-            if (userToken == null) {
-                return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED);
-            }
-            
-            if (dataUser == null) {
+            if (user == null) {
                 return new ValidationTokenUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.UNAUTHORIZED);
             }
 
-            if (userToken.getId() != dataUser.getId()) {
+            if (userToken == null) {
                 return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED);
             }
-    
-    
-            return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, dataUser, HttpStatus.OK);
+
+            if (userToken.getId() != user.getId()) {
+                return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED);
+            }
+
+            switch (action) {
+
+                case "SEARCH_USER":
+                return new ValidationTokenUserResponse( Message.USER_FOUND_SUCCESS, user, HttpStatus.OK);
+
+                case "DELETE_USER":
+                return new ValidationTokenUserResponse( Message.USER_DELETE_SUCCESS, null, HttpStatus.OK);
+
+                case "UPDATE_USER":
+                return new ValidationTokenUserResponse( Message.USER_UPDATE_SUCCESS, user, HttpStatus.OK);
+            
+                default:
+                return new ValidationTokenUserResponse( null,null,null);
+            }
 
         } catch (Exception e) {
 
             return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN+" "+ e.getMessage(), null,  HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
-       
-
     }
 
+
+    // public UserEntity updateUser(int id) {
+    //     return userRepository.update(id).orElse(null);
+    // }
     
 }

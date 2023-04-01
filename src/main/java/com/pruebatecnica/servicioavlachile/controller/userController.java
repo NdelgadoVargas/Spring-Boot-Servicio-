@@ -8,11 +8,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.pruebatecnica.dto.UserDTO;
+import com.pruebatecnica.dto.UserUpdateDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.SearchUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
@@ -22,11 +24,13 @@ import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.servicioavlachile.services.UserService;
 import com.pruebatecnica.utils.Token.generateTokenJwt;
+import com.pruebatecnica.utils.action.ActionParameterized;
 import com.pruebatecnica.utils.message.Message;
-import com.pruebatecnica.utils.message.MessageException;
 import com.pruebatecnica.utils.validation.Validation;
 import jakarta.transaction.Transactional;
-
+// FALTA IMPLEMENTAR LOGG
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @RestController
 @Transactional
@@ -39,6 +43,8 @@ public class userController {
     UsersRepository userRepository;
     @Autowired
     UserTokenRepository userTokenRepository;
+
+    ActionParameterized action = new ActionParameterized();
 
     @PostMapping("/create")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody UserDTO userDTO) {
@@ -98,67 +104,99 @@ public class userController {
 
     }
 
-    // OBTENER GET 
     @GetMapping("/search/{id}")
     public ResponseEntity<SearchUserResponse> getUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
 
         try {
 
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id);
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.SEARCH_USER);
 
-            if(validationTokenUser.getStatus() != HttpStatus.OK ){
-                return new ResponseEntity<>(new SearchUserResponse(
+            return new ResponseEntity<>(new SearchUserResponse(
                 validationTokenUser.getMessage(), 
-                validationTokenUser.getUser(), 
-                validationTokenUser.getStatus()),
-                validationTokenUser.getStatus());
-            }
-           
-            return new ResponseEntity<>(new SearchUserResponse( validationTokenUser.getMessage(), validationTokenUser.getUser(),  validationTokenUser.getStatus()),  validationTokenUser.getStatus());
+                validationTokenUser.getUser(),  
+                validationTokenUser.getStatus()),  
+                validationTokenUser.getStatus()
+            );
 
         } catch (Exception e) {
-            return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new SearchUserResponse( 
+                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(),
+                null,
+                HttpStatus.INTERNAL_SERVER_ERROR), 
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
        
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<SearchUserResponse> deleteUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
 
-    // DELETE DELETE
-    // @DeleteMapping("/delete/{id}")
-    // public ResponseEntity<SearchUserResponse> deleteUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
+        try {
 
-    //     try {
-
-    //         UserEntity userToken = userService.getUserFromToken(token);
-
-    //         if (userToken == null) {
-    //             return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED), HttpStatus.UNAUTHORIZED);
-    //         }
-
-    //         UserEntity getUser = userService.getUser(id);
-
-    //         if (userToken.getId() != getUser.getId()) {
-    //             throw new MessageException(Message.ERROR_INVALID_TOKEN);
-    //         }
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.DELETE_USER);
             
-    //         Boolean deleteUser = userService.deleteUser(id);
-    //         System.out.println(deleteUser);
-            // if(dataUser == null){
-            //     return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.NOT_FOUND), HttpStatus.NOT_FOUND);
+            if(validationTokenUser.getStatus() == HttpStatus.OK){
+                userService.deleteUser(id);
+            }
+           
+            return new ResponseEntity<>(new SearchUserResponse( 
+                validationTokenUser.getMessage(), 
+                validationTokenUser.getUser(),
+                validationTokenUser.getStatus()), 
+                validationTokenUser.getStatus()
+            );
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(new SearchUserResponse(
+                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
+                null, 
+                HttpStatus.INTERNAL_SERVER_ERROR), 
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
+        }
+    
+    }
+    
+    @PutMapping("/update/{id}")
+    public String updateUser
+        (
+            @RequestHeader("Authorization") String token,
+            @PathVariable("id") int id , 
+            @RequestBody UserUpdateDTO dataUpdate)
+        {
+        
+        try {
+
+            System.out.println(token);
+            System.out.println(id);
+            System.out.println(dataUpdate);
+
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.UPDATE_USER);
+            
+            // if(validationTokenUser.getStatus() == HttpStatus.OK){
+            //    UserEntity newData =  userService.updateUser(id);
             // }
-
-    //         return new ResponseEntity<>(new SearchUserResponse( Message.USER_FOUND_SUCCESS, null, HttpStatus.OK), HttpStatus.OK);
-
-    //     } catch (Exception e) {
-    //         return new ResponseEntity<>(new SearchUserResponse( Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), null, HttpStatus.INTERNAL_SERVER_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
+           
+            // return new ResponseEntity<>(new SearchUserResponse( 
+            //     validationTokenUser.getMessage(), 
+            //     validationTokenUser.getUser(),
+            //     validationTokenUser.getStatus()), 
+            //     validationTokenUser.getStatus()
+            // );
+                return "ok";
+        } catch (Exception e) {
+            // return new ResponseEntity<>(new SearchUserResponse(
+            //     Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
+            //     null, 
+            //     HttpStatus.INTERNAL_SERVER_ERROR), 
+            //     HttpStatus.INTERNAL_SERVER_ERROR
+            // );
+            return "o";
+        }
     
-    // }
+    }
     
- 
-    // UPDATE PUT
-
-
     
 
 
