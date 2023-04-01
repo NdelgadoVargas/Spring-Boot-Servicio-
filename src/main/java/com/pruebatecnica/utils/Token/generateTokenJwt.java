@@ -1,4 +1,7 @@
 package com.pruebatecnica.utils.token;
+
+import java.util.Date;
+
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -10,8 +13,10 @@ public class GenerateTokenJwt {
 
     public String generateToken(String email, String password) {
 
+        Date date = new Date();
+        System.out.print(date);
         String token = Jwts.builder()
-            .setSubject(email + "." + password)
+            .setSubject(email + "." + password + "." + date)
             .signWith(key)
             .compact();
         return token;
