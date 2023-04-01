@@ -11,7 +11,7 @@ import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
-import com.pruebatecnica.utils.date.DateFormat;
+import com.pruebatecnica.utils.format.DateFormat;
 import com.pruebatecnica.utils.message.Message;
 import com.pruebatecnica.utils.token.GenerateTokenJwt;
 import jakarta.transaction.Transactional;

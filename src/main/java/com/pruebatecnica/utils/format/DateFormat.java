@@ -1,4 +1,4 @@
-package com.pruebatecnica.utils.date;
+package com.pruebatecnica.utils.format;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -23,7 +23,7 @@ import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.servicioavlachile.services.UserService;
 import com.pruebatecnica.utils.action.ActionParameterized;
-import com.pruebatecnica.utils.date.DateFormat;
+import com.pruebatecnica.utils.format.DateFormat;
 import com.pruebatecnica.utils.message.Message;
 import com.pruebatecnica.utils.token.GenerateTokenJwt;
 import com.pruebatecnica.utils.validation.ValidationRegex;
