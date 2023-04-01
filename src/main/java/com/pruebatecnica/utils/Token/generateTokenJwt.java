@@ -1,7 +1,5 @@
 package com.pruebatecnica.utils.token;
-
 import java.util.Date;
-
 import javax.crypto.SecretKey;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
