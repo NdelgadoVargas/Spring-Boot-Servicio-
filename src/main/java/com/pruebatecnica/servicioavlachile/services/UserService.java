@@ -1,18 +1,20 @@
 package com.pruebatecnica.servicioavlachile.services;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.pruebatecnica.dto.UserDTO;
+import com.pruebatecnica.dto.UserUpdateDTO;
+import com.pruebatecnica.dto.getUserDTO;
+import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.utils.message.Message;
-
-import aj.org.objectweb.asm.Type;
-import ch.qos.logback.core.joran.action.Action;
 import jakarta.transaction.Transactional;
 
 
@@ -85,7 +87,7 @@ public class UserService {
                 return new ValidationTokenUserResponse( Message.USER_DELETE_SUCCESS, null, HttpStatus.OK);
 
                 case "UPDATE_USER":
-                return new ValidationTokenUserResponse( Message.USER_UPDATE_SUCCESS, user, HttpStatus.OK);
+                return new ValidationTokenUserResponse( null,null,HttpStatus.OK);
             
                 default:
                 return new ValidationTokenUserResponse( null,null,null);
@@ -99,8 +101,29 @@ public class UserService {
     }
 
 
-    // public UserEntity updateUser(int id) {
-    //     return userRepository.update(id).orElse(null);
-    // }
+    public UpdateUserResponse updateUser(int id , UserUpdateDTO dataUpdate) {
+
+        UserEntity user =  userRepository.findById(id).orElse(null);
+
+        user.setName(dataUpdate.getName());
+        user.setEmail(dataUpdate.getEmail());
+        user.setPassword(dataUpdate.getPassword());
+
+        Date creationDate = user.getCreationDate();
+        SimpleDateFormat formato1 = new SimpleDateFormat("dd-MM-yyyy");
+        String creationDateFormat = formato1.format(creationDate);
+
+        Date modifiedDate = user.getCreationDate();
+        SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
+        String modifiedDateFormat = formato2.format(modifiedDate);
+
+        return new UpdateUserResponse(
+            user.getId(),
+            Message.USER_UPDATE_SUCCESS, 
+            creationDateFormat, 
+            modifiedDateFormat, 
+            HttpStatus.OK
+         );
+    }
     
 }

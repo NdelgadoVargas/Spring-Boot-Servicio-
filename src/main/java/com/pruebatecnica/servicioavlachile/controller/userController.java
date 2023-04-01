@@ -17,6 +17,7 @@ import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.UserUpdateDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.SearchUserResponse;
+import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
@@ -159,42 +160,47 @@ public class userController {
     }
     
     @PutMapping("/update/{id}")
-    public String updateUser
+    public ResponseEntity<UpdateUserResponse> updateUser 
         (
             @RequestHeader("Authorization") String token,
-            @PathVariable("id") int id , 
+            @PathVariable("id") int id, 
             @RequestBody UserUpdateDTO dataUpdate)
         {
-        
+
         try {
 
-            System.out.println(token);
-            System.out.println(id);
-            System.out.println(dataUpdate);
-
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.UPDATE_USER);
-            
-            // if(validationTokenUser.getStatus() == HttpStatus.OK){
-            //    UserEntity newData =  userService.updateUser(id);
-            // }
-           
-            // return new ResponseEntity<>(new SearchUserResponse( 
-            //     validationTokenUser.getMessage(), 
-            //     validationTokenUser.getUser(),
-            //     validationTokenUser.getStatus()), 
-            //     validationTokenUser.getStatus()
-            // );
-                return "ok";
-        } catch (Exception e) {
-            // return new ResponseEntity<>(new SearchUserResponse(
-            //     Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
-            //     null, 
-            //     HttpStatus.INTERNAL_SERVER_ERROR), 
-            //     HttpStatus.INTERNAL_SERVER_ERROR
-            // );
-            return "o";
-        }
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken( token, id, action.UPDATE_USER);
     
+            if(validationTokenUser.getStatus() == HttpStatus.OK){
+
+                UpdateUserResponse updateUser =  userService.updateUser(id, dataUpdate);
+                
+                return ResponseEntity.ok()
+                .body(new UpdateUserResponse(
+                        updateUser.getId(),
+                        updateUser.getMessage(),
+                        updateUser.getCreated(),
+                        updateUser.getModified(),
+                        updateUser.getHttpStatus()
+                ));
+
+            }else{
+
+                return new ResponseEntity<>(new UpdateUserResponse(
+                    0,
+                    validationTokenUser.getMessage(), 
+                    null,
+                    null,
+                    validationTokenUser.getStatus()),
+                    validationTokenUser.getStatus()
+                );
+
+            }
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
     
     
