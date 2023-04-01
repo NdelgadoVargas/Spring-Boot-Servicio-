@@ -2,7 +2,7 @@ package com.pruebatecnica.utils.validation;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Validation {
+public class ValidationRegex {
 
     public boolean emailFormat(String email) {
         String emailRegex = "^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$";

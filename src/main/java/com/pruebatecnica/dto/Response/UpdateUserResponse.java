@@ -7,15 +7,17 @@ public class UpdateUserResponse {
     private String message;
     private String created;
     private String modified;
+    private String updateToken;
     private HttpStatus httpStatus;
     
     public UpdateUserResponse() {}
     
-    public UpdateUserResponse(long id, String message, String created, String modified, HttpStatus httpStatus) {
+    public UpdateUserResponse(long id, String message, String created, String modified,String updateToken, HttpStatus httpStatus) {
         this.id = id;
         this.message = message;
         this.created = created;
         this.modified = modified;
+        this.updateToken = updateToken;
         this.httpStatus = httpStatus;
     }
 
@@ -49,6 +51,14 @@ public class UpdateUserResponse {
         this.modified = modified;
     }
 
+    public String getUpdateToken() {
+        return updateToken;
+    }
+
+    public void setUpdateToken(String updateToken) {
+        this.updateToken = updateToken;
+    }
+    
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }

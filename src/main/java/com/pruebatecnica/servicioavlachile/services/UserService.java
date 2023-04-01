@@ -1,20 +1,19 @@
 package com.pruebatecnica.servicioavlachile.services;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.UserUpdateDTO;
-import com.pruebatecnica.dto.getUserDTO;
 import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
+import com.pruebatecnica.utils.date.DateFormat;
 import com.pruebatecnica.utils.message.Message;
+import com.pruebatecnica.utils.token.GenerateTokenJwt;
 import jakarta.transaction.Transactional;
 
 
@@ -26,32 +25,35 @@ public class UserService {
     UsersRepository userRepository;
     @Autowired
     UserTokenRepository userTokenRepository;
-    
+
+    DateFormat dateUtils = new DateFormat();
+
     public UserEntity createUser(UserDTO userDTO) {
 
-        if (userDTO.getName() == null || userDTO.getName().isEmpty() ||
-                userDTO.getEmail() == null || userDTO.getEmail().isEmpty() ||
-                userDTO.getPassword() == null || userDTO.getPassword().isEmpty()) {
-
-            throw new IllegalArgumentException("Nombre,email y password son campos requeridos");
-        }
-
         return userRepository.save(userDTO.toEntity());
+
     }
 
     public boolean emailExists(String email) {
+
         return userRepository.findByEmail(email).isPresent();
+
     }
 
     public UserEntity getUser(int id) {
+
         return userRepository.findById(id).orElse(null);
+
     }
 
     public Boolean deleteUser(int id) {
         try {
+
             userRepository.deleteById(id);
             return true;
+
         } catch (EmptyResultDataAccessException e) {
+
             return false;
         }
     }
@@ -60,21 +62,25 @@ public class UserService {
     public ValidationTokenUserResponse getUserFromToken(String token,int id, String action) {
         
         try {
-            
+
+            UserEntity user = userRepository.findById(id).orElse(null);
             String tokenValue = token.replaceFirst("Bearer ", "");
             UserTokenEntity userToken = userTokenRepository.findByToken(tokenValue);
-    
-            UserEntity user = userRepository.findById(id).orElse(null);
-    
+            long token_idUser, IdUser;
+           
+
             if (user == null) {
                 return new ValidationTokenUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.UNAUTHORIZED);
             }
-
+     
             if (userToken == null) {
                 return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED);
             }
+           
+            token_idUser = userToken.getUser().getId();
+            IdUser = user.getUserToken().getUser().getId();
 
-            if (userToken.getId() != user.getId()) {
+            if (token_idUser != IdUser) {
                 return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN, null, HttpStatus.UNAUTHORIZED);
             }
 
@@ -101,29 +107,75 @@ public class UserService {
     }
 
 
-    public UpdateUserResponse updateUser(int id , UserUpdateDTO dataUpdate) {
+    public UpdateUserResponse updateUser(int id , UserUpdateDTO dataUpdate, String token) {
 
-        UserEntity user =  userRepository.findById(id).orElse(null);
 
-        user.setName(dataUpdate.getName());
-        user.setEmail(dataUpdate.getEmail());
-        user.setPassword(dataUpdate.getPassword());
+        try {
+            
+            GenerateTokenJwt generateTokenJwt = new GenerateTokenJwt();
 
-        Date creationDate = user.getCreationDate();
-        SimpleDateFormat formato1 = new SimpleDateFormat("dd-MM-yyyy");
-        String creationDateFormat = formato1.format(creationDate);
+            UserEntity user =  userRepository.findById(id).orElse(null);
+    
+            String oldToken = token.replaceFirst("Bearer ", "");
+            UserTokenEntity currentToken = userTokenRepository.findByToken(oldToken);
+    
+            long token_idUser, IdUser;
+            token_idUser = currentToken.getUser().getId();
+            IdUser = user.getUserToken().getUser().getId();
+    
+            if( token_idUser == IdUser){
+    
+                // ACTUALIZO USER
+                user.setName(dataUpdate.getName());
+                user.setEmail(dataUpdate.getEmail());
+                user.setPassword(dataUpdate.getPassword());
+    
+                String newToken = generateTokenJwt.generateToken(user.getEmail(), user.getPassword());
+               
+                String creationDateFormat = dateUtils.dateFormat(user.getCreationDate());
+                String modifiedDateFormat = dateUtils.dateFormat(user.getCreationDate());
+    
+                // ACTUALIZO TOKEN
+                currentToken.setToken(newToken);
+                currentToken.setUser(user);
+    
+                return new UpdateUserResponse(
+                    user.getId(),
+                    Message.USER_UPDATE_SUCCESS, 
+                    creationDateFormat, 
+                    modifiedDateFormat,
+                    newToken, 
+                    HttpStatus.OK
+                );
+    
+            }else{
+    
+                return new UpdateUserResponse(
+                    0,
+                    Message.ERROR_INVALID_TOKEN, 
+                    null, 
+                    null,
+                    null, 
+                    HttpStatus.UNAUTHORIZED
+                );
+    
+            }
 
-        Date modifiedDate = user.getCreationDate();
-        SimpleDateFormat formato2 = new SimpleDateFormat("dd-MM-yyyy");
-        String modifiedDateFormat = formato2.format(modifiedDate);
+        } catch (Exception e) {
+           
+            return new UpdateUserResponse(
+                    0,
+                    Message.ERROR_CREATING_USER_EXCEPTION+" "+ e.getMessage(), 
+                    null, 
+                    null,
+                    null, 
+                    HttpStatus.INTERNAL_SERVER_ERROR
+                );
+        }
 
-        return new UpdateUserResponse(
-            user.getId(),
-            Message.USER_UPDATE_SUCCESS, 
-            creationDateFormat, 
-            modifiedDateFormat, 
-            HttpStatus.OK
-         );
+        
+        
+        
     }
     
 }

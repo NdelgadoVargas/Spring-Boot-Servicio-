@@ -1,6 +1,4 @@
 package com.pruebatecnica.servicioavlachile.controller;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +22,11 @@ import com.pruebatecnica.servicioavlachile.entity.UserTokenEntity;
 import com.pruebatecnica.servicioavlachile.repositories.UserTokenRepository;
 import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.servicioavlachile.services.UserService;
-import com.pruebatecnica.utils.Token.generateTokenJwt;
 import com.pruebatecnica.utils.action.ActionParameterized;
+import com.pruebatecnica.utils.date.DateFormat;
 import com.pruebatecnica.utils.message.Message;
-import com.pruebatecnica.utils.validation.Validation;
+import com.pruebatecnica.utils.token.GenerateTokenJwt;
+import com.pruebatecnica.utils.validation.ValidationRegex;
 import jakarta.transaction.Transactional;
 // FALTA IMPLEMENTAR LOGG
 import org.slf4j.Logger;
@@ -46,13 +45,14 @@ public class userController {
     UserTokenRepository userTokenRepository;
 
     ActionParameterized action = new ActionParameterized();
+    DateFormat dateUtils = new DateFormat();
 
     @PostMapping("/create")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody UserDTO userDTO) {
 
         try {
-            Validation validation = new Validation();
-            generateTokenJwt Encript = new generateTokenJwt();
+            ValidationRegex validation = new ValidationRegex();
+            GenerateTokenJwt Encript = new GenerateTokenJwt();
 
             if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
                 return new ResponseEntity<>(
@@ -86,9 +86,7 @@ public class userController {
                 userToken.setUser(newUser);
                 userTokenRepository.save(userToken);
 
-                Date creationDate = newUser.getCreationDate();
-                SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy");
-                String creationDateFormat = formato.format(creationDate);
+                String creationDateFormat = dateUtils.dateFormat(newUser.getCreationDate());
 
                 return new ResponseEntity<>(new CreateUserResponse(newUser.getId(), creationDateFormat, null,
                 Message.USER_CREATED_SUCCESSFULLY, HttpStatus.CREATED, token), HttpStatus.CREATED);
@@ -98,15 +96,25 @@ public class userController {
             }
 
         } catch (Exception e) {
-            return new ResponseEntity<>(new CreateUserResponse(0, null, null,
-            Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), HttpStatus.BAD_GATEWAY, null),
-            HttpStatus.BAD_GATEWAY);
+            return new ResponseEntity<>(new CreateUserResponse(
+                0, 
+                null, 
+                null,
+                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
+                HttpStatus.INTERNAL_SERVER_ERROR, 
+                null),
+                HttpStatus.INTERNAL_SERVER_ERROR
+            );
         }
 
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<SearchUserResponse> getUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
+    public ResponseEntity<SearchUserResponse> getUser
+        (
+            @RequestHeader("Authorization") String token, 
+            @PathVariable("id") int id)
+        {
 
         try {
 
@@ -131,7 +139,12 @@ public class userController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SearchUserResponse> deleteUser(@RequestHeader("Authorization") String token, @PathVariable("id") int id){
+    public ResponseEntity<SearchUserResponse> deleteUser
+        (
+            @RequestHeader("Authorization") 
+            String token, 
+            @PathVariable("id") int id)
+        {
 
         try {
 
@@ -173,7 +186,7 @@ public class userController {
     
             if(validationTokenUser.getStatus() == HttpStatus.OK){
 
-                UpdateUserResponse updateUser =  userService.updateUser(id, dataUpdate);
+                UpdateUserResponse updateUser =  userService.updateUser(id, dataUpdate, token);
                 
                 return ResponseEntity.ok()
                 .body(new UpdateUserResponse(
@@ -181,6 +194,7 @@ public class userController {
                         updateUser.getMessage(),
                         updateUser.getCreated(),
                         updateUser.getModified(),
+                        updateUser.getUpdateToken(),
                         updateUser.getHttpStatus()
                 ));
 
@@ -191,6 +205,7 @@ public class userController {
                     validationTokenUser.getMessage(), 
                     null,
                     null,
+                    null,
                     validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
@@ -198,7 +213,9 @@ public class userController {
             }
 
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(
+                HttpStatus.INTERNAL_SERVER_ERROR
+            ).build();
         }
 
     }

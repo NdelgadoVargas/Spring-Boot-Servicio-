@@ -1,4 +1,4 @@
-package com.pruebatecnica.utils.Token;
+package com.pruebatecnica.utils.token;
 import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
