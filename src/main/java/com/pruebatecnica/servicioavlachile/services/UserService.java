@@ -109,7 +109,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<CreateUserResponse> validationCreateUser(UserDTO userDTO) {
+    public ResponseEntity<CreateUserResponse> validationRequestBody(UserDTO userDTO) {
 
         try {
             ValidationRegex validation = new ValidationRegex();
@@ -149,7 +149,7 @@ public class UserService {
     }
 
 
-    public UpdateUserResponse updateUser(int id , UserUpdateDTO dataUpdate, String token) {
+    public UpdateUserResponse updateUser(int id , UserDTO dataUpdate, String token) {
 
 
         try {

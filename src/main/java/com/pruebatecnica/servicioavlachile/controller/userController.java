@@ -1,4 +1,5 @@
 package com.pruebatecnica.servicioavlachile.controller;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,68 +54,81 @@ public class userController {
 
         logger.info("METODO ==> createUser");
         logger.info("RequestBody ==>"
-         + "Name ==> " + userDTO.getName()+" "
-         + "Email ==> " + userDTO.getEmail()+" "
-         + "Password ==> " + userDTO.getPassword()+" "
+            + "Name ==> " + userDTO.getName() + " "
+            + "Email ==> " + userDTO.getEmail() + " "
+            + "Password ==> " + userDTO.getPassword() + " "
         );
 
         for (PhoneDTO phone : userDTO.getPhones()) {
             logger.info("Phone ==>" + phone.getNumber());
         }
-      
+
         try {
 
             GenerateTokenJwt Encript = new GenerateTokenJwt();
 
-            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationCreateUser(userDTO);
-            
-            if(validationRequestBody.getStatusCode() == HttpStatus.OK){
+            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(userDTO);
+
+            if (validationRequestBody.getStatusCode() == HttpStatus.OK) {
 
                 UserEntity newUser = userService.createUser(userDTO);
 
                 if (newUser != null) {
-    
-                    String token = Encript.generateToken(newUser.getEmail(),newUser.getPassword());
-    
+
+                    String token = Encript.generateToken(newUser.getEmail(), newUser.getPassword());
+
                     UserTokenEntity userToken = new UserTokenEntity();
                     userToken.setToken(token);
                     userToken.setUser(newUser);
                     userTokenRepository.save(userToken);
-    
+
                     String creationDateFormat = dateUtils.dateFormat(newUser.getCreationDate());
 
-                    return new ResponseEntity<>(new CreateUserResponse(newUser.getId(), creationDateFormat, null,
-                    Message.USER_CREATED_SUCCESSFULLY, HttpStatus.CREATED, token), HttpStatus.CREATED);
+                    return new ResponseEntity<>(new CreateUserResponse(
+                        newUser.getId(), 
+                        creationDateFormat, 
+                        null,
+                        Message.USER_CREATED_SUCCESSFULLY, 
+                        HttpStatus.CREATED, 
+                        token), 
+                        HttpStatus.CREATED
+                    );
 
                 } else {
-    
+
                     logger.warn(Message.ERROR_CREATING_USER);
-    
-                    return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.ERROR_CREATING_USER,
-                    HttpStatus.INTERNAL_SERVER_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
+
+                    return new ResponseEntity<>(new CreateUserResponse(
+                        0, 
+                        null, 
+                        null, 
+                        Message.ERROR_CREATING_USER,
+                        HttpStatus.INTERNAL_SERVER_ERROR, 
+                        null), 
+                        HttpStatus.INTERNAL_SERVER_ERROR
+                    );
                 }
 
+            } else {
 
-            }else{
-                
                 logger.warn(validationRequestBody.getBody().getMessage());
 
                 CreateUserResponse createUserResponse = validationRequestBody.getBody();
-                return new ResponseEntity<>(createUserResponse, HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>(createUserResponse, 
+                    HttpStatus.INTERNAL_SERVER_ERROR
+                );
             }
-
-            
 
         } catch (Exception e) {
 
             logger.error(Message.ERROR_CREATING_USER_EXCEPTION, e.getMessage());
 
             return new ResponseEntity<>(new CreateUserResponse(
-                0, 
-                null, 
+                0,
                 null,
-                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
-                HttpStatus.INTERNAL_SERVER_ERROR, 
+                null,
+                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR,
                 null),
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
@@ -123,96 +137,91 @@ public class userController {
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<SearchUserResponse> getUser
-        (
-            @RequestHeader("Authorization") String token, 
-            @PathVariable("id") int id)
-        {
+    public ResponseEntity<SearchUserResponse> getUser(
+            @RequestHeader("Authorization") String token,
+            @PathVariable("id") int id) {
 
             logger.info("METODO ==> searchUser");
             logger.info("==> "
-                + "Token ==> " + token+" "
-                + "Id  ==> " + id+" "
+                + "Token ==> " + token + " "
+                + "Id  ==> " + id + " "
             );
 
         try {
 
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.SEARCH_USER);
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token, id, action.SEARCH_USER);
 
-            if(validationTokenUser.getStatus() == HttpStatus.OK){
+            if (validationTokenUser.getStatus() == HttpStatus.OK) {
 
                 return new ResponseEntity<>(new SearchUserResponse(
-                    validationTokenUser.getMessage(), 
-                    validationTokenUser.getUser(),  
-                    validationTokenUser.getStatus()),  
+                    validationTokenUser.getMessage(),
+                    validationTokenUser.getUser(),
+                    validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
 
-            }else{
+            } else {
 
                 logger.warn(validationTokenUser.getMessage());
 
                 return new ResponseEntity<>(new SearchUserResponse(
-                    validationTokenUser.getMessage(), 
-                    validationTokenUser.getUser(),  
-                    validationTokenUser.getStatus()),  
+                    validationTokenUser.getMessage(),
+                    validationTokenUser.getUser(),
+                    validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
 
             }
-           
 
         } catch (Exception e) {
 
             logger.error(Message.ERROR_SEARCH_USER_EXCEPTION, e.getMessage());
-            
-            return new ResponseEntity<>(new SearchUserResponse( 
+
+            return new ResponseEntity<>(new SearchUserResponse(
                 Message.ERROR_SEARCH_USER_EXCEPTION + " " + e.getMessage(),
                 null,
-                HttpStatus.INTERNAL_SERVER_ERROR), 
+                HttpStatus.INTERNAL_SERVER_ERROR),
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
-       
+
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SearchUserResponse> deleteUser
-        (
-            @RequestHeader("Authorization") 
-            String token, 
-            @PathVariable("id") int id)
-        {
+    public ResponseEntity<SearchUserResponse> deleteUser(
+            @RequestHeader("Authorization") String token,
+            @PathVariable("id") int id) {
 
             logger.info("METODO ==> deleteUser");
             logger.info("==> "
-                + "Token ==> " + token+" "
-                + "Id  ==> " + id+" "
+                + "Token ==> " + token + " "
+                + "Id  ==> " + id + " "
             );
 
         try {
 
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.DELETE_USER);
-            
-            if(validationTokenUser.getStatus() == HttpStatus.OK){
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token, id,
+                    action.DELETE_USER);
+
+            if (validationTokenUser.getStatus() == HttpStatus.OK) {
 
                 userService.deleteUser(id);
 
-                return new ResponseEntity<>(new SearchUserResponse( 
-                    validationTokenUser.getMessage(), 
+                return new ResponseEntity<>(new SearchUserResponse(
+                    validationTokenUser.getMessage(),
                     validationTokenUser.getUser(),
-                    validationTokenUser.getStatus()), 
+                    validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
 
-            }else{
+            } else {
 
                 logger.warn(validationTokenUser.getMessage());
 
-                return new ResponseEntity<>(new SearchUserResponse( 
-                    validationTokenUser.getMessage(), 
+                return new ResponseEntity<>(new SearchUserResponse(
+                    validationTokenUser.getMessage(),
                     validationTokenUser.getUser(),
-                    validationTokenUser.getStatus()), 
+                    validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
             }
@@ -222,64 +231,81 @@ public class userController {
             logger.error(Message.ERROR_DELETE_USER_EXCEPTION, e.getMessage());
 
             return new ResponseEntity<>(new SearchUserResponse(
-                Message.ERROR_DELETE_USER_EXCEPTION + " " + e.getMessage(), 
-                null, 
-                HttpStatus.INTERNAL_SERVER_ERROR), 
+                Message.ERROR_DELETE_USER_EXCEPTION + " " + e.getMessage(),
+                null,
+                HttpStatus.INTERNAL_SERVER_ERROR),
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
         }
-    
+
     }
-    
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<UpdateUserResponse> updateUser 
-        (
+    public ResponseEntity<UpdateUserResponse> updateUser(
             @RequestHeader("Authorization") String token,
-            @PathVariable("id") int id, 
-            @RequestBody UserUpdateDTO dataUpdate)
-        {
+            @PathVariable("id") int id,
+            @RequestBody UserDTO dataUpdate) {
 
             logger.info("METODO ==> updateUser");
             logger.info("==> "
-            + "Token ==> " + token+" "
-            + "Id  ==> " + id+" "
-            + "RequestBody ==> "+" "
-            + "Name ==> "+dataUpdate.getName()+" "
-            + "Email ==> "+dataUpdate.getEmail()+" "
-            + "Password ==> "+dataUpdate.getPassword()+" "
+                + "Token ==> " + token + " "
+                + "Id  ==> " + id + " "
+                + "RequestBody ==> " + " "
+                + "Name ==> " + dataUpdate.getName() + " "
+                + "Email ==> " + dataUpdate.getEmail() + " "
+                + "Password ==> " + dataUpdate.getPassword() + " "
             );
-
 
         try {
 
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken( token, id, action.UPDATE_USER);
-    
-            if(validationTokenUser.getStatus() == HttpStatus.OK){
+            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(dataUpdate);
 
-                UpdateUserResponse updateUser =  userService.updateUser(id, dataUpdate, token);
-                
-                return ResponseEntity.ok()
-                .body(new UpdateUserResponse(
-                    updateUser.getId(),
-                    updateUser.getMessage(),
-                    updateUser.getCreated(),
-                    updateUser.getModified(),
-                    updateUser.getUpdateToken(),
-                    updateUser.getHttpStatus()
-                ));
+            if (validationRequestBody.getStatusCode() == HttpStatus.OK) {
 
-            }else{
+                ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token, id,
+                        action.UPDATE_USER);
 
-                logger.warn(validationTokenUser.getMessage());
+                if (validationTokenUser.getStatus() == HttpStatus.OK) {
 
+                    UpdateUserResponse updateUser = userService.updateUser(id, dataUpdate, token);
+
+                    return ResponseEntity.ok()
+                    .body(new UpdateUserResponse(
+                        updateUser.getId(),
+                        updateUser.getMessage(),
+                        updateUser.getCreated(),
+                        updateUser.getModified(),
+                        updateUser.getUpdateToken(),
+                        updateUser.getHttpStatus())
+                    );
+
+                } else {
+
+                    logger.warn(validationTokenUser.getMessage());
+
+                    return new ResponseEntity<>(new UpdateUserResponse(
+                        0,
+                        validationTokenUser.getMessage(),
+                        null,
+                        null,
+                        null,
+                        validationTokenUser.getStatus()),
+                        validationTokenUser.getStatus()
+                    );
+
+                }
+            } else {
+
+                logger.warn(validationRequestBody.getBody().getMessage());
+
+                CreateUserResponse createUserResponse = validationRequestBody.getBody();
                 return new ResponseEntity<>(new UpdateUserResponse(
-                    0,
-                    validationTokenUser.getMessage(), 
-                    null,
-                    null,
-                    null,
-                    validationTokenUser.getStatus()),
-                    validationTokenUser.getStatus()
+                    createUserResponse.getId(),
+                    createUserResponse.getMessage(),
+                    createUserResponse.getCreated(),
+                    createUserResponse.getModified(),
+                    createUserResponse.getToken(),
+                    createUserResponse.getHttpStatus()), createUserResponse.getHttpStatus()
                 );
 
             }
@@ -289,10 +315,10 @@ public class userController {
             logger.error(Message.ERROR_UPDATE_USER_EXCEPTION, e.getMessage());
 
             return ResponseEntity.status(
-                HttpStatus.INTERNAL_SERVER_ERROR
-            ).build();
+                HttpStatus.INTERNAL_SERVER_ERROR)
+            .build();
         }
 
     }
-    
+
 }
