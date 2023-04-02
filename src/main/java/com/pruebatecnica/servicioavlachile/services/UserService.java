@@ -5,7 +5,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.pruebatecnica.dto.UserDTO;
-import com.pruebatecnica.dto.UserUpdateDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
@@ -109,7 +108,7 @@ public class UserService {
         }
     }
 
-    public ResponseEntity<CreateUserResponse> validationRequestBody(UserDTO userDTO) {
+    public ResponseEntity<CreateUserResponse> validationRequestBody(UserDTO userDTO, boolean isCreationUser) {
 
         try {
             ValidationRegex validation = new ValidationRegex();
@@ -133,7 +132,7 @@ public class UserService {
                 HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
             }
 
-            if (emailExists(userDTO.getEmail())) {
+            if (isCreationUser && emailExists(userDTO.getEmail())) {
 
                 return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.EMAIL_ALREADY_REGISTERED,
                 HttpStatus.CONFLICT, null), HttpStatus.CONFLICT);

@@ -1,5 +1,4 @@
 package com.pruebatecnica.servicioavlachile.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.pruebatecnica.dto.PhoneDTO;
 import com.pruebatecnica.dto.UserDTO;
-import com.pruebatecnica.dto.UserUpdateDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.SearchUserResponse;
 import com.pruebatecnica.dto.Response.UpdateUserResponse;
@@ -67,7 +65,7 @@ public class userController {
 
             GenerateTokenJwt Encript = new GenerateTokenJwt();
 
-            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(userDTO);
+            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(userDTO,true);
 
             if (validationRequestBody.getStatusCode() == HttpStatus.OK) {
 
@@ -258,7 +256,7 @@ public class userController {
 
         try {
 
-            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(dataUpdate);
+            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationRequestBody(dataUpdate,false);
 
             if (validationRequestBody.getStatusCode() == HttpStatus.OK) {
 
