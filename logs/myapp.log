@@ -27,3 +27,53 @@
 2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> 243221sAA23134a2@gmail.com Password ==> Password132 
 2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>555
 2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>5526
+2023-04-02 03:56:52.372 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 5360 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
+2023-04-02 03:56:52.374 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
+2023-04-02 03:56:52.842 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-02 03:56:52.892 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 43 ms. Found 3 JPA repository interfaces.
+2023-04-02 03:56:53.316 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-04-02 03:56:53.326 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-02 03:56:53.327 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2023-04-02 03:56:53.327 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
+2023-04-02 03:56:53.438 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+2023-04-02 03:56:53.440 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1028 ms
+2023-04-02 03:56:53.567 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-02 03:56:53.605 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-04-02 03:56:53.790 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2023-04-02 03:56:54.008 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6ce2e079
+2023-04-02 03:56:54.010 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2023-04-02 03:56:54.057 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-04-02 03:56:54.622 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-02 03:56:54.630 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-02 03:56:54.974 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-02 03:56:55.244 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-04-02 03:56:55.262 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-02 03:56:55.270 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.147 seconds (process running for 3.618)
+2023-04-02 03:57:09.180 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-02 03:57:09.180 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-04-02 03:57:09.181 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2023-04-02 03:57:09.259 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> createUser
+2023-04-02 03:57:09.259 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> 243221sAAaa23134a2@gmail.com Password ==> Password132 
+2023-04-02 03:57:09.259 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - Phone ==>555
+2023-04-02 03:57:09.260 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - Phone ==>5526
+2023-04-02 03:57:40.715 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> searchUser
+2023-04-02 03:57:40.715 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUFhYTIzMTM0YTJAZ21haWwuY29tLlBhc3N3b3JkMTMyLlN1biBBcHIgMDIgMDM6NTc6MDkgQ0xUIDIwMjMifQ.L8cRnWUomDIB7C85nBiVdoUBk-_Zh3AgZpH-IIHCaXC0qqc_U3SUDVhz3BPnh9WfkysYAAKsl1J83nQVJcVOsg Id  ==> 6 
+2023-04-02 03:57:49.091 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> deleteUser
+2023-04-02 03:57:49.092 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzMzFhMkBnbWFpbC5jb20uUGFzc3dvcmQxMi5TdW4gQXByIDAyIDAxOjUyOjM0IENMVCAyMDIzIn0.KxmIuu00MMwYLSsq-16e1WvUhum8KkFMNJN8JAld1PrJuq_tkgVeUFQ7jckw_SxwtymV9MT52C0dh_bz36aAaA Id  ==> 6 
+2023-04-02 03:57:49.099 WARN  [http-nio-8080-exec-4] c.p.s.c.userController - Token invalido
+2023-04-02 03:57:53.464 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> deleteUser
+2023-04-02 03:57:53.465 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUFhYTIzMTM0YTJAZ21haWwuY29tLlBhc3N3b3JkMTMyLlN1biBBcHIgMDIgMDM6NTc6MDkgQ0xUIDIwMjMifQ.L8cRnWUomDIB7C85nBiVdoUBk-_Zh3AgZpH-IIHCaXC0qqc_U3SUDVhz3BPnh9WfkysYAAKsl1J83nQVJcVOsg Id  ==> 6 
+2023-04-02 03:57:55.224 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> deleteUser
+2023-04-02 03:57:55.224 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUFhYTIzMTM0YTJAZ21haWwuY29tLlBhc3N3b3JkMTMyLlN1biBBcHIgMDIgMDM6NTc6MDkgQ0xUIDIwMjMifQ.L8cRnWUomDIB7C85nBiVdoUBk-_Zh3AgZpH-IIHCaXC0qqc_U3SUDVhz3BPnh9WfkysYAAKsl1J83nQVJcVOsg Id  ==> 6 
+2023-04-02 03:57:55.228 WARN  [http-nio-8080-exec-6] c.p.s.c.userController - Usuario no encontrado
+2023-04-02 03:58:06.959 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> updateUser
+2023-04-02 03:58:06.960 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAwMjowMjowMCBDTFQgMjAyMyJ9.ZUuQQlcFwLPYnjRo6QYu8qXKqsh0eeYMMNCoUxadziDoC2LsaWxBwbQ5kllNREEnoEZJHQ0cHFH8ZHpTKWAfzA Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password1212sdsa 
+2023-04-02 03:58:06.966 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Token invalido
+2023-04-02 03:58:13.680 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> updateUser
+2023-04-02 03:58:13.681 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUEyMzEzNGEyQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDAzOjUzOjQyIENMVCAyMDIzIn0.jSBxjhcJG-V-jikMUT1WOZiQI4iXnpxyeYSad9i-sihBaj_KAS4HGGG-9hdxkqInzI8m2Bd-w6rMAaal25-khw Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmai Password ==> Password1212sdsa 
+2023-04-02 03:58:13.681 WARN  [http-nio-8080-exec-8] c.p.s.c.userController - Formato de correo electrónico inválido
+2023-04-02 03:58:20.392 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> updateUser
+2023-04-02 03:58:20.392 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUEyMzEzNGEyQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDAzOjUzOjQyIENMVCAyMDIzIn0.jSBxjhcJG-V-jikMUT1WOZiQI4iXnpxyeYSad9i-sihBaj_KAS4HGGG-9hdxkqInzI8m2Bd-w6rMAaal25-khw Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> ssword1212sdsa 
+2023-04-02 03:58:20.393 WARN  [http-nio-8080-exec-10] c.p.s.c.userController - Formato de clave inválido
+2023-04-02 03:58:26.056 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> updateUser
+2023-04-02 03:58:26.056 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUEyMzEzNGEyQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDAzOjUzOjQyIENMVCAyMDIzIn0.jSBxjhcJG-V-jikMUT1WOZiQI4iXnpxyeYSad9i-sihBaj_KAS4HGGG-9hdxkqInzI8m2Bd-w6rMAaal25-khw Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password1212sdsa 
