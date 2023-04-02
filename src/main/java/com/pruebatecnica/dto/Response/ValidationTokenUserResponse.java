@@ -1,7 +1,5 @@
 package com.pruebatecnica.dto.Response;
-
 import org.springframework.http.HttpStatus;
-
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
 
 public class ValidationTokenUserResponse {
@@ -34,7 +32,5 @@ public class ValidationTokenUserResponse {
     public void setStatus(HttpStatus status) {
         this.status = status;
     }
-
- // RETORNAR UN MENSAJE ERROR - RETORNAR DATA DE USER - HTTP STATUS
 
 }

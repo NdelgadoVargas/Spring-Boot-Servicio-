@@ -1,7 +1,6 @@
 package com.pruebatecnica.servicioavlachile.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,7 +28,6 @@ public class PhoneEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    //  Getters
      public long getId() {
         return id;
     }
@@ -42,7 +40,6 @@ public class PhoneEntity {
         return user;
     }
 
-    // Setters
     public void setId(long id) {
         this.id = id;
     }

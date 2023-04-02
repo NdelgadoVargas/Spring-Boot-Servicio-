@@ -2,9 +2,11 @@ package com.pruebatecnica.servicioavlachile.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.UserUpdateDTO;
+import com.pruebatecnica.dto.Response.CreateUserResponse;
 import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
 import com.pruebatecnica.servicioavlachile.entity.UserEntity;
@@ -14,6 +16,7 @@ import com.pruebatecnica.servicioavlachile.repositories.UsersRepository;
 import com.pruebatecnica.utils.format.DateFormat;
 import com.pruebatecnica.utils.message.Message;
 import com.pruebatecnica.utils.token.GenerateTokenJwt;
+import com.pruebatecnica.utils.validation.ValidationRegex;
 
 import jakarta.transaction.Transactional;
 
@@ -36,7 +39,7 @@ public class UserService {
     }
 
     public boolean emailExists(String email) {
-
+        
         return userRepository.findByEmail(email).isPresent();
 
     }
@@ -68,7 +71,6 @@ public class UserService {
             String tokenValue = token.replaceFirst("Bearer ", "");
             UserTokenEntity userToken = userTokenRepository.findByToken(tokenValue);
             long token_idUser, IdUser;
-           
 
             if (user == null) {
                 return new ValidationTokenUserResponse( Message.ERROR_USER_NOT_FOUND, null, HttpStatus.UNAUTHORIZED);
@@ -105,6 +107,45 @@ public class UserService {
             return new ValidationTokenUserResponse( Message.ERROR_INVALID_TOKEN+" "+ e.getMessage(), null,  HttpStatus.INTERNAL_SERVER_ERROR);
 
         }
+    }
+
+    public ResponseEntity<CreateUserResponse> validationCreateUser(UserDTO userDTO) {
+
+        try {
+            ValidationRegex validation = new ValidationRegex();
+
+            if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
+
+                return new ResponseEntity<>(
+                new CreateUserResponse(0, null, null, Message.EMAIL_REQUIRED, HttpStatus.BAD_REQUEST, null),
+                HttpStatus.BAD_REQUEST);
+            }
+
+            if (!validation.emailFormat(userDTO.getEmail())) {
+
+                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.INVALID_EMAIL_FORMAT,
+                HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
+            }
+
+            if (!validation.passwordFormat(userDTO.getPassword())) {
+
+                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.INVALID_PASSWORD_FORMAT,
+                HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
+            }
+
+            if (emailExists(userDTO.getEmail())) {
+
+                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.EMAIL_ALREADY_REGISTERED,
+                HttpStatus.CONFLICT, null), HttpStatus.CONFLICT);
+            }
+
+            return new ResponseEntity<>(HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.ERROR_CREATING_USER_EXCEPTION+" "+ e.getMessage(),
+            HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
+        }
+
     }
 
 

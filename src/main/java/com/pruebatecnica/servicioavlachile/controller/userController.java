@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.pruebatecnica.dto.PhoneDTO;
 import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.UserUpdateDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
@@ -26,9 +27,7 @@ import com.pruebatecnica.utils.action.ActionParameterized;
 import com.pruebatecnica.utils.format.DateFormat;
 import com.pruebatecnica.utils.message.Message;
 import com.pruebatecnica.utils.token.GenerateTokenJwt;
-import com.pruebatecnica.utils.validation.ValidationRegex;
 import jakarta.transaction.Transactional;
-// FALTA IMPLEMENTAR LOGG
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,55 +46,69 @@ public class userController {
     ActionParameterized action = new ActionParameterized();
     DateFormat dateUtils = new DateFormat();
 
+    private static final Logger logger = LoggerFactory.getLogger(userController.class);
+
     @PostMapping("/create")
     public ResponseEntity<CreateUserResponse> createUser(@RequestBody UserDTO userDTO) {
 
+        logger.info("METODO ==> createUser");
+        logger.info("RequestBody ==>"
+         + "Name ==> " + userDTO.getName()+" "
+         + "Email ==> " + userDTO.getEmail()+" "
+         + "Password ==> " + userDTO.getPassword()+" "
+        );
+
+        for (PhoneDTO phone : userDTO.getPhones()) {
+            logger.info("Phone ==>" + phone.getNumber());
+        }
+      
         try {
-            ValidationRegex validation = new ValidationRegex();
+
             GenerateTokenJwt Encript = new GenerateTokenJwt();
 
-            if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
-                return new ResponseEntity<>(
-                new CreateUserResponse(0, null, null, Message.EMAIL_REQUIRED, HttpStatus.BAD_REQUEST, null),
-                HttpStatus.BAD_REQUEST);
+            ResponseEntity<CreateUserResponse> validationRequestBody = userService.validationCreateUser(userDTO);
+            
+            if(validationRequestBody.getStatusCode() == HttpStatus.OK){
+
+                UserEntity newUser = userService.createUser(userDTO);
+
+                if (newUser != null) {
+    
+                    String token = Encript.generateToken(newUser.getEmail(),newUser.getPassword());
+    
+                    UserTokenEntity userToken = new UserTokenEntity();
+                    userToken.setToken(token);
+                    userToken.setUser(newUser);
+                    userTokenRepository.save(userToken);
+    
+                    String creationDateFormat = dateUtils.dateFormat(newUser.getCreationDate());
+
+                    return new ResponseEntity<>(new CreateUserResponse(newUser.getId(), creationDateFormat, null,
+                    Message.USER_CREATED_SUCCESSFULLY, HttpStatus.CREATED, token), HttpStatus.CREATED);
+
+                } else {
+    
+                    logger.warn(Message.ERROR_CREATING_USER);
+    
+                    return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.ERROR_CREATING_USER,
+                    HttpStatus.INTERNAL_SERVER_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
+                }
+
+
+            }else{
+                
+                logger.warn(validationRequestBody.getBody().getMessage());
+
+                CreateUserResponse createUserResponse = validationRequestBody.getBody();
+                return new ResponseEntity<>(createUserResponse, HttpStatus.INTERNAL_SERVER_ERROR);
             }
 
-            if (!validation.emailFormat(userDTO.getEmail())) {
-                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.INVALID_EMAIL_FORMAT,
-                HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
-            }
-
-            if (!validation.passwordFormat(userDTO.getPassword())) {
-                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.INVALID_PASSWORD_FORMAT,
-                HttpStatus.BAD_REQUEST, null), HttpStatus.BAD_REQUEST);
-            }
-
-            if (userService.emailExists(userDTO.getEmail())) {
-                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.EMAIL_ALREADY_REGISTERED,
-                HttpStatus.CONFLICT, null), HttpStatus.CONFLICT);
-            }
-
-            UserEntity newUser = userService.createUser(userDTO);
-
-            if (newUser != null) {
-
-                String token = Encript.generateToken(newUser.getEmail(),newUser.getPassword());
-
-                UserTokenEntity userToken = new UserTokenEntity();
-                userToken.setToken(token);
-                userToken.setUser(newUser);
-                userTokenRepository.save(userToken);
-
-                String creationDateFormat = dateUtils.dateFormat(newUser.getCreationDate());
-
-                return new ResponseEntity<>(new CreateUserResponse(newUser.getId(), creationDateFormat, null,
-                Message.USER_CREATED_SUCCESSFULLY, HttpStatus.CREATED, token), HttpStatus.CREATED);
-            } else {
-                return new ResponseEntity<>(new CreateUserResponse(0, null, null, Message.ERROR_CREATING_USER,
-                HttpStatus.INTERNAL_SERVER_ERROR, null), HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+            
 
         } catch (Exception e) {
+
+            logger.error(Message.ERROR_CREATING_USER_EXCEPTION, e.getMessage());
+
             return new ResponseEntity<>(new CreateUserResponse(
                 0, 
                 null, 
@@ -116,20 +129,45 @@ public class userController {
             @PathVariable("id") int id)
         {
 
+            logger.info("METODO ==> searchUser");
+            logger.info("==> "
+                + "Token ==> " + token+" "
+                + "Id  ==> " + id+" "
+            );
+
         try {
 
             ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.SEARCH_USER);
 
-            return new ResponseEntity<>(new SearchUserResponse(
-                validationTokenUser.getMessage(), 
-                validationTokenUser.getUser(),  
-                validationTokenUser.getStatus()),  
-                validationTokenUser.getStatus()
-            );
+            if(validationTokenUser.getStatus() == HttpStatus.OK){
+
+                return new ResponseEntity<>(new SearchUserResponse(
+                    validationTokenUser.getMessage(), 
+                    validationTokenUser.getUser(),  
+                    validationTokenUser.getStatus()),  
+                    validationTokenUser.getStatus()
+                );
+
+            }else{
+
+                logger.warn(validationTokenUser.getMessage());
+
+                return new ResponseEntity<>(new SearchUserResponse(
+                    validationTokenUser.getMessage(), 
+                    validationTokenUser.getUser(),  
+                    validationTokenUser.getStatus()),  
+                    validationTokenUser.getStatus()
+                );
+
+            }
+           
 
         } catch (Exception e) {
+
+            logger.error(Message.ERROR_SEARCH_USER_EXCEPTION, e.getMessage());
+            
             return new ResponseEntity<>(new SearchUserResponse( 
-                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(),
+                Message.ERROR_SEARCH_USER_EXCEPTION + " " + e.getMessage(),
                 null,
                 HttpStatus.INTERNAL_SERVER_ERROR), 
                 HttpStatus.INTERNAL_SERVER_ERROR
@@ -146,24 +184,45 @@ public class userController {
             @PathVariable("id") int id)
         {
 
+            logger.info("METODO ==> deleteUser");
+            logger.info("==> "
+                + "Token ==> " + token+" "
+                + "Id  ==> " + id+" "
+            );
+
         try {
 
             ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token,id, action.DELETE_USER);
             
             if(validationTokenUser.getStatus() == HttpStatus.OK){
+
                 userService.deleteUser(id);
+
+                return new ResponseEntity<>(new SearchUserResponse( 
+                    validationTokenUser.getMessage(), 
+                    validationTokenUser.getUser(),
+                    validationTokenUser.getStatus()), 
+                    validationTokenUser.getStatus()
+                );
+
+            }else{
+
+                logger.warn(validationTokenUser.getMessage());
+
+                return new ResponseEntity<>(new SearchUserResponse( 
+                    validationTokenUser.getMessage(), 
+                    validationTokenUser.getUser(),
+                    validationTokenUser.getStatus()), 
+                    validationTokenUser.getStatus()
+                );
             }
-           
-            return new ResponseEntity<>(new SearchUserResponse( 
-                validationTokenUser.getMessage(), 
-                validationTokenUser.getUser(),
-                validationTokenUser.getStatus()), 
-                validationTokenUser.getStatus()
-            );
 
         } catch (Exception e) {
+
+            logger.error(Message.ERROR_DELETE_USER_EXCEPTION, e.getMessage());
+
             return new ResponseEntity<>(new SearchUserResponse(
-                Message.ERROR_CREATING_USER_EXCEPTION + " " + e.getMessage(), 
+                Message.ERROR_DELETE_USER_EXCEPTION + " " + e.getMessage(), 
                 null, 
                 HttpStatus.INTERNAL_SERVER_ERROR), 
                 HttpStatus.INTERNAL_SERVER_ERROR
@@ -180,6 +239,17 @@ public class userController {
             @RequestBody UserUpdateDTO dataUpdate)
         {
 
+            logger.info("METODO ==> updateUser");
+            logger.info("==> "
+            + "Token ==> " + token+" "
+            + "Id  ==> " + id+" "
+            + "RequestBody ==> "+" "
+            + "Name ==> "+dataUpdate.getName()+" "
+            + "Email ==> "+dataUpdate.getEmail()+" "
+            + "Password ==> "+dataUpdate.getPassword()+" "
+            );
+
+
         try {
 
             ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken( token, id, action.UPDATE_USER);
@@ -190,15 +260,17 @@ public class userController {
                 
                 return ResponseEntity.ok()
                 .body(new UpdateUserResponse(
-                        updateUser.getId(),
-                        updateUser.getMessage(),
-                        updateUser.getCreated(),
-                        updateUser.getModified(),
-                        updateUser.getUpdateToken(),
-                        updateUser.getHttpStatus()
+                    updateUser.getId(),
+                    updateUser.getMessage(),
+                    updateUser.getCreated(),
+                    updateUser.getModified(),
+                    updateUser.getUpdateToken(),
+                    updateUser.getHttpStatus()
                 ));
 
             }else{
+
+                logger.warn(validationTokenUser.getMessage());
 
                 return new ResponseEntity<>(new UpdateUserResponse(
                     0,
@@ -213,6 +285,9 @@ public class userController {
             }
 
         } catch (Exception e) {
+
+            logger.error(Message.ERROR_UPDATE_USER_EXCEPTION, e.getMessage());
+
             return ResponseEntity.status(
                 HttpStatus.INTERNAL_SERVER_ERROR
             ).build();
@@ -220,7 +295,4 @@ public class userController {
 
     }
     
-    
-
-
 }

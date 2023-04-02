@@ -67,9 +67,4 @@ public class UpdateUserResponse {
         this.httpStatus = httpStatus;
     }
 
-  
-
-
-
-
 }

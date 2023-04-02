@@ -31,7 +31,6 @@ public class UserDTO {
         return userEntity;
     }
 
-    // Getters and setters
     public String getName() {
         return name;
     }
