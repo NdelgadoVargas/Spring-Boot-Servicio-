@@ -1,0 +1,29 @@
+2023-04-02 03:53:26.701 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 17636 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
+2023-04-02 03:53:26.705 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
+2023-04-02 03:53:27.188 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-02 03:53:27.243 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 3 JPA repository interfaces.
+2023-04-02 03:53:27.655 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-04-02 03:53:27.663 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-02 03:53:27.665 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2023-04-02 03:53:27.665 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
+2023-04-02 03:53:27.757 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+2023-04-02 03:53:27.758 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1010 ms
+2023-04-02 03:53:27.933 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-02 03:53:27.977 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-04-02 03:53:28.214 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2023-04-02 03:53:28.466 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@2eb6d34a
+2023-04-02 03:53:28.468 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2023-04-02 03:53:28.515 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-04-02 03:53:29.113 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-02 03:53:29.121 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-02 03:53:29.423 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-02 03:53:29.642 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-04-02 03:53:29.665 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-02 03:53:29.670 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.223 seconds (process running for 3.659)
+2023-04-02 03:53:42.304 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-02 03:53:42.305 INFO  [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-04-02 03:53:42.306 INFO  [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2023-04-02 03:53:42.381 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> createUser
+2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> 243221sAA23134a2@gmail.com Password ==> Password132 
+2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>555
+2023-04-02 03:53:42.382 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>5526
