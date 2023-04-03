@@ -240,7 +240,7 @@ public class userController {
 
     @PutMapping("/update/{id}")
     public ResponseEntity<UpdateUserResponse> updateUser(
-            @RequestHeader("Authorization") String token,
+            @RequestHeader("Authorization")  String token,
             @PathVariable("id") int id,
             @RequestBody UserDTO dataUpdate) {
 
