@@ -36,6 +36,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 	<!-- TOKEN -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
