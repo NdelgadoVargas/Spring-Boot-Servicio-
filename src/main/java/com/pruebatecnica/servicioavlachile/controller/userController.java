@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pruebatecnica.dto.PhoneDTO;
 import com.pruebatecnica.dto.UserDTO;
 import com.pruebatecnica.dto.Response.CreateUserResponse;
+import com.pruebatecnica.dto.Response.DeleteUserResponse;
 import com.pruebatecnica.dto.Response.SearchUserResponse;
 import com.pruebatecnica.dto.Response.UpdateUserResponse;
 import com.pruebatecnica.dto.Response.ValidationTokenUserResponse;
@@ -186,7 +187,7 @@ public class userController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<SearchUserResponse> deleteUser(
+    public ResponseEntity<DeleteUserResponse> deleteUser(
             @RequestHeader("Authorization") String token,
             @PathVariable("id") int id) {
 
@@ -198,16 +199,14 @@ public class userController {
 
         try {
 
-            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token, id,
-                    action.DELETE_USER);
-
+            ValidationTokenUserResponse validationTokenUser = userService.getUserFromToken(token, id, action.DELETE_USER);
+                   
             if (validationTokenUser.getStatus() == HttpStatus.OK) {
 
                 userService.deleteUser(id);
 
-                return new ResponseEntity<>(new SearchUserResponse(
+                return new ResponseEntity<>(new DeleteUserResponse(
                     validationTokenUser.getMessage(),
-                    validationTokenUser.getUser(),
                     validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
@@ -216,9 +215,8 @@ public class userController {
 
                 logger.warn(validationTokenUser.getMessage());
 
-                return new ResponseEntity<>(new SearchUserResponse(
+                return new ResponseEntity<>(new DeleteUserResponse(
                     validationTokenUser.getMessage(),
-                    validationTokenUser.getUser(),
                     validationTokenUser.getStatus()),
                     validationTokenUser.getStatus()
                 );
@@ -228,9 +226,8 @@ public class userController {
 
             logger.error(Message.ERROR_DELETE_USER_EXCEPTION, e.getMessage());
 
-            return new ResponseEntity<>(new SearchUserResponse(
+            return new ResponseEntity<>(new DeleteUserResponse(
                 Message.ERROR_DELETE_USER_EXCEPTION + " " + e.getMessage(),
-                null,
                 HttpStatus.INTERNAL_SERVER_ERROR),
                 HttpStatus.INTERNAL_SERVER_ERROR
             );
