@@ -1,554 +1,70 @@
-2023-04-02 20:51:08.065 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 13560 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 20:51:08.071 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 20:51:08.730 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 20:51:08.788 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 48 ms. Found 3 JPA repository interfaces.
-2023-04-02 20:51:09.310 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 20:51:09.321 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 20:51:09.322 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 20:51:09.323 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 20:51:09.426 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 20:51:09.428 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1317 ms
-2023-04-02 20:51:09.555 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 20:51:09.594 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 20:51:09.801 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 20:51:10.051 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@87aec6a
-2023-04-02 20:51:10.053 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 20:51:10.096 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 20:51:10.310 INFO  [main] o.h.c.b.TypeSafeActivator - Error calling `jakarta.validation.Validation#buildDefaultValidatorFactory`
-jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-	at jakarta.validation.Validation$GenericBootstrapImpl.configure(Validation.java:291)
-	at jakarta.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:479)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.activate(TypeSafeActivator.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.hibernate.cfg.beanvalidation.BeanValidationIntegrator.integrate(BeanValidationIntegrator.java:137)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:287)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1423)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1132)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:907)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
-	at com.pruebatecnica.servicioavlachile.ServicioAvlaChileApplication.main(ServicioAvlaChileApplication.java:9)
-2023-04-02 20:51:10.721 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 20:51:10.728 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 20:51:11.125 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 20:51:11.725 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 20:51:11.745 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 20:51:11.753 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.958 seconds (process running for 4.382)
-2023-04-02 20:54:00.102 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 7476 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 20:54:00.105 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 20:54:00.598 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 20:54:00.653 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 3 JPA repository interfaces.
-2023-04-02 20:54:01.068 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 20:54:01.083 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 20:54:01.084 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 20:54:01.085 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 20:54:01.174 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 20:54:01.180 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1032 ms
-2023-04-02 20:54:01.300 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 20:54:01.333 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 20:54:01.544 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 20:54:01.786 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@48106381
-2023-04-02 20:54:01.787 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 20:54:01.831 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 20:54:02.035 INFO  [main] o.h.c.b.TypeSafeActivator - Error calling `jakarta.validation.Validation#buildDefaultValidatorFactory`
-jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-	at jakarta.validation.Validation$GenericBootstrapImpl.configure(Validation.java:291)
-	at jakarta.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:479)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.activate(TypeSafeActivator.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.hibernate.cfg.beanvalidation.BeanValidationIntegrator.integrate(BeanValidationIntegrator.java:137)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:287)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1423)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1132)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:907)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
-	at com.pruebatecnica.servicioavlachile.ServicioAvlaChileApplication.main(ServicioAvlaChileApplication.java:9)
-2023-04-02 20:54:02.493 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 20:54:02.500 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 20:54:02.880 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 20:54:03.620 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 20:54:03.639 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 20:54:03.647 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.788 seconds (process running for 4.211)
-2023-04-02 20:54:30.423 INFO  [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-02 20:54:30.424 INFO  [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-04-02 20:54:30.425 INFO  [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
-2023-04-02 20:54:30.508 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:54:30.508 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail. Password ==> assword132 
-2023-04-02 20:54:30.508 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:54:30.509 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:54:30.522 WARN  [http-nio-8080-exec-1] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 20:54:44.815 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:54:44.815 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail. Password ==> assword132 
-2023-04-02 20:54:44.815 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:54:44.815 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:54:44.816 WARN  [http-nio-8080-exec-3] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 20:54:49.483 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:54:49.483 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail.com Password ==> ssword132 
-2023-04-02 20:54:49.484 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:54:49.484 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:54:49.484 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Formato de clave inválido
-2023-04-02 20:54:57.589 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:54:57.590 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail.com Password ==> Password132 
-2023-04-02 20:54:57.590 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:54:57.590 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:55:15.233 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 20:55:15.233 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAxODowNjozOCBDTFQgMjAyMyJ9.SHiRdtfsOJuFPwcieb0cNPoaS5v6l9OIFxUQEWAAdBFDYeCg-lBBTI4DDgy22prFbS1vLLlMCIvbftKQq01dhg Id  ==> 1 
-2023-04-02 20:55:15.252 WARN  [http-nio-8080-exec-9] c.p.s.c.userController - Token invalido
-2023-04-02 20:55:23.395 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 20:55:23.396 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:26.224 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 20:55:26.224 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:31.369 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 20:55:31.369 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vgx Id  ==> 1 
-2023-04-02 20:55:31.374 WARN  [http-nio-8080-exec-1] c.p.s.c.userController - Token invalido
-2023-04-02 20:55:35.056 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 20:55:35.056 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:43.911 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:55:43.911 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIyNDMyMjFzQUFhYTIzMTM0YTJAZ21haWwuY29tLlBhc3N3b3JkMTMyLlN1biBBcHIgMDIgMDM6NTc6MDkgQ0xUIDIwMjMifQ.L8cRnWUomDIB7C85nBiVdoUBk-_Zh3AgZpH-IIHCaXC0qqc_U3SUDVhz3BPnh9WfkysYAAKsl1J83nQVJcVOsg Id  ==> 1 
-2023-04-02 20:55:43.918 WARN  [http-nio-8080-exec-3] c.p.s.c.userController - Token invalido
-2023-04-02 20:55:54.104 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:55:54.104 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:56.347 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:55:56.347 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:56.350 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:55:58.373 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:55:58.374 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:55:58.377 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:56:05.855 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:56:05.855 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail.com Password ==> Password132 
-2023-04-02 20:56:05.855 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:56:05.855 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:56:15.617 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:56:15.617 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:56:15.621 WARN  [http-nio-8080-exec-9] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:15.984 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:15.985 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:57:15.989 WARN  [http-nio-8080-exec-10] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:17.087 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:17.087 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:57:17.090 WARN  [http-nio-8080-exec-2] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:17.673 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:17.673 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 1 
-2023-04-02 20:57:17.677 WARN  [http-nio-8080-exec-1] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:34.039 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:34.040 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU2OjA1IENMVCAyMDIzIn0.PaVEiAv9OdJylbot0RwaonoZxQvFXjsFv0WOSkB757pJ2R1CE_Cqd8eQOE3HFcqPVzlgdm9B7a_zeIAzBWoF8Q Id  ==> 1 
-2023-04-02 20:57:34.049 WARN  [http-nio-8080-exec-4] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:37.364 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:37.364 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU2OjA1IENMVCAyMDIzIn0.PaVEiAv9OdJylbot0RwaonoZxQvFXjsFv0WOSkB757pJ2R1CE_Cqd8eQOE3HFcqPVzlgdm9B7a_zeIAzBWoF8Q Id  ==> 2 
-2023-04-02 20:57:39.702 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 20:57:39.703 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU2OjA1IENMVCAyMDIzIn0.PaVEiAv9OdJylbot0RwaonoZxQvFXjsFv0WOSkB757pJ2R1CE_Cqd8eQOE3HFcqPVzlgdm9B7a_zeIAzBWoF8Q Id  ==> 2 
-2023-04-02 20:57:39.706 WARN  [http-nio-8080-exec-6] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 20:57:57.615 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 20:57:57.616 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail.com Password ==> Password132 
-2023-04-02 20:57:57.616 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>555
-2023-04-02 20:57:57.616 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>5526
-2023-04-02 20:58:12.369 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 20:58:12.370 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU3OjU3IENMVCAyMDIzIn0.hM6WjjAsGCZLZxW6zpPSdly6upMU0HqOF-Pnuns2IrBGPi1hPZU3aUy-WtrsRi1Xt999h1-x7z-XyZQdYj_vigA Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password1212sdsa 
-2023-04-02 20:58:12.375 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Token invalido
-2023-04-02 20:58:21.030 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 20:58:21.030 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU3OjU3IENMVCAyMDIzIn0.hM6WjjAsGCZLZxW6zpPSdly6upMU0HqOF-Pnuns2IrBGPi1hPZU3aUy-WtrsRi1Xt999h1-x7z-XyZQdYj_vig Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password1212sdsa 
-2023-04-02 21:05:41.506 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:05:41.507 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail Password ==> Password1212sdsa 
-2023-04-02 21:05:41.507 WARN  [http-nio-8080-exec-2] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 21:05:44.480 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:05:44.481 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail Password ==> Password1212sdsa 
-2023-04-02 21:05:44.481 WARN  [http-nio-8080-exec-4] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 21:05:55.932 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:05:55.932 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> assword 
-2023-04-02 21:05:55.932 WARN  [http-nio-8080-exec-6] c.p.s.c.userController - Formato de clave inválido
-2023-04-02 21:06:00.202 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:06:00.202 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password 
-2023-04-02 21:06:00.203 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Formato de clave inválido
-2023-04-02 21:06:04.710 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:06:04.711 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
-2023-04-02 21:06:17.340 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:06:17.340 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 3 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
-2023-04-02 21:06:17.344 WARN  [http-nio-8080-exec-10] c.p.s.c.userController - Token invalido
-2023-04-02 21:06:31.318 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:06:31.325 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-04-02 21:06:31.329 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-04-02 21:08:36.964 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 18116 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:08:36.969 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:08:37.464 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:08:37.507 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 36 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:08:37.907 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:08:37.917 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:08:37.918 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:08:37.919 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:08:38.015 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:08:38.017 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1013 ms
-2023-04-02 21:08:38.132 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:08:38.174 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:08:38.387 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:08:38.616 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@336e3be2
-2023-04-02 21:08:38.617 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:08:38.661 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:08:38.860 INFO  [main] o.h.c.b.TypeSafeActivator - Error calling `jakarta.validation.Validation#buildDefaultValidatorFactory`
-jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-	at jakarta.validation.Validation$GenericBootstrapImpl.configure(Validation.java:291)
-	at jakarta.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:479)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.activate(TypeSafeActivator.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.hibernate.cfg.beanvalidation.BeanValidationIntegrator.integrate(BeanValidationIntegrator.java:137)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:287)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1423)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1132)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:907)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
-	at com.pruebatecnica.servicioavlachile.ServicioAvlaChileApplication.main(ServicioAvlaChileApplication.java:9)
-2023-04-02 21:08:39.250 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:08:39.259 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:08:39.624 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:08:40.429 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:08:40.449 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:08:40.456 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.727 seconds (process running for 4.151)
-2023-04-02 21:09:48.685 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-02 21:09:48.685 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-04-02 21:09:48.687 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 2 ms
-2023-04-02 21:09:48.729 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 21:09:48.730 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU0OjU3IENMVCAyMDIzIn0.BIYGRHe8-RPgclZo3Cl1lit9Rfw68bOlkZVGKRmNrCoHcKm_c0QDDCsAScApNVerMO69oFfLHHunK-MDCIU7vg Id  ==> 3 
-2023-04-02 21:09:48.855 WARN  [http-nio-8080-exec-2] c.p.s.c.userController - Token invalido
-2023-04-02 21:09:53.755 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 21:09:53.755 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIuU3VuIEFwciAwMiAyMTowNjowNCBDTFQgMjAyMyJ9.7fn6bGq3U6I0VZDgSJQ69Q3lyQhHELAwLGnOqL1HIc-NzrNnZfdFwBn9sOINTlXwas_PIQwmGfOtRnSYQeuSRA Id  ==> 3 
-2023-04-02 21:09:56.188 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 21:09:56.188 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIuU3VuIEFwciAwMiAyMTowNjowNCBDTFQgMjAyMyJ9.7fn6bGq3U6I0VZDgSJQ69Q3lyQhHELAwLGnOqL1HIc-NzrNnZfdFwBn9sOINTlXwas_PIQwmGfOtRnSYQeuSRA Id  ==> 3 
-2023-04-02 21:10:09.210 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 21:10:09.210 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIwOjU2OjA1IENMVCAyMDIzIn0.PaVEiAv9OdJylbot0RwaonoZxQvFXjsFv0WOSkB757pJ2R1CE_Cqd8eQOE3HFcqPVzlgdm9B7a_zeIAzBWoF8Q Id  ==> 3 
-2023-04-02 21:10:09.216 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Token invalido
-2023-04-02 21:10:14.397 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 21:10:14.398 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIuU3VuIEFwciAwMiAyMTowNjowNCBDTFQgMjAyMyJ9.7fn6bGq3U6I0VZDgSJQ69Q3lyQhHELAwLGnOqL1HIc-NzrNnZfdFwBn9sOINTlXwas_PIQwmGfOtRnSYQeuSRA Id  ==> 3 
-2023-04-02 21:32:45.928 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 8316 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:32:45.935 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:32:46.462 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:32:46.511 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:32:46.916 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:32:46.932 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:32:46.933 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:32:46.934 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:32:47.032 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:32:47.038 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1057 ms
-2023-04-02 21:32:47.155 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:32:47.192 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:32:47.390 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:32:47.595 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51a719e7
-2023-04-02 21:32:47.601 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:32:47.641 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:32:47.815 INFO  [main] o.h.c.b.TypeSafeActivator - Error calling `jakarta.validation.Validation#buildDefaultValidatorFactory`
-jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-	at jakarta.validation.Validation$GenericBootstrapImpl.configure(Validation.java:291)
-	at jakarta.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:479)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.activate(TypeSafeActivator.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.hibernate.cfg.beanvalidation.BeanValidationIntegrator.integrate(BeanValidationIntegrator.java:137)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:287)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1423)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1132)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:907)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
-	at com.pruebatecnica.servicioavlachile.ServicioAvlaChileApplication.main(ServicioAvlaChileApplication.java:9)
-2023-04-02 21:32:48.213 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:32:48.231 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:32:48.582 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:32:49.181 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:32:49.208 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:32:49.217 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.528 seconds (process running for 3.931)
-2023-04-02 21:34:35.271 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 7544 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:34:35.278 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:34:35.842 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:34:35.890 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 40 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:34:36.330 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:34:36.340 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:34:36.341 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:34:36.342 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:34:36.440 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:34:36.442 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1124 ms
-2023-04-02 21:34:36.566 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:34:36.609 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:34:36.798 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:34:37.016 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51a719e7
-2023-04-02 21:34:37.025 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:34:37.065 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:34:37.239 INFO  [main] o.h.c.b.TypeSafeActivator - Error calling `jakarta.validation.Validation#buildDefaultValidatorFactory`
-jakarta.validation.NoProviderFoundException: Unable to create a Configuration, because no Jakarta Bean Validation provider could be found. Add a provider like Hibernate Validator (RI) to your classpath.
-	at jakarta.validation.Validation$GenericBootstrapImpl.configure(Validation.java:291)
-	at jakarta.validation.Validation.buildDefaultValidatorFactory(Validation.java:103)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.getValidatorFactory(TypeSafeActivator.java:479)
-	at org.hibernate.cfg.beanvalidation.TypeSafeActivator.activate(TypeSafeActivator.java:82)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
-	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
-	at org.hibernate.cfg.beanvalidation.BeanValidationIntegrator.integrate(BeanValidationIntegrator.java:137)
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:287)
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:415)
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1423)
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:376)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:409)
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396)
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:352)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1816)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1766)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:598)
-	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:520)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:326)
-	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:324)
-	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:200)
-	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1132)
-	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:907)
-	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:584)
-	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:146)
-	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:732)
-	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:434)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:310)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1304)
-	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1293)
-	at com.pruebatecnica.servicioavlachile.ServicioAvlaChileApplication.main(ServicioAvlaChileApplication.java:9)
-2023-04-02 21:34:37.617 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:34:37.637 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:34:38.001 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:34:38.797 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:34:38.804 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:34:38.825 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.809 seconds (process running for 4.247)
-2023-04-02 21:35:33.281 INFO  [background-preinit] o.h.v.i.u.Version - HV000001: Hibernate Validator 8.0.0.Final
-2023-04-02 21:35:33.319 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 18280 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:35:33.321 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:35:33.879 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:35:33.935 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 41 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:35:34.360 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:35:34.368 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:35:34.369 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:35:34.369 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:35:34.452 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:35:34.456 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1095 ms
-2023-04-02 21:35:34.567 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:35:34.611 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:35:34.802 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:35:35.041 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@6a6e9289
-2023-04-02 21:35:35.043 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:35:35.089 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:35:35.687 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:35:35.705 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:35:36.066 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:35:36.721 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:35:36.755 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:35:36.763 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.695 seconds (process running for 4.151)
-2023-04-02 21:35:55.653 INFO  [background-preinit] o.h.v.i.u.Version - HV000001: Hibernate Validator 8.0.0.Final
-2023-04-02 21:35:55.688 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 18212 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:35:55.689 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:35:56.225 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:35:56.271 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:35:56.696 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:35:56.705 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:35:56.706 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:35:56.707 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:35:56.794 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:35:56.796 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1073 ms
-2023-04-02 21:35:56.913 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:35:56.951 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:35:57.146 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:35:57.373 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@51b51641
-2023-04-02 21:35:57.375 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:35:57.419 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:35:58.015 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:35:58.022 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:35:58.407 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:35:58.998 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:35:59.019 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:35:59.026 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.563 seconds (process running for 3.97)
-2023-04-02 21:36:08.552 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:36:08.554 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-04-02 21:36:08.559 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
-2023-04-02 21:36:15.065 INFO  [background-preinit] o.h.v.i.u.Version - HV000001: Hibernate Validator 8.0.0.Final
-2023-04-02 21:36:15.103 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 8580 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:36:15.105 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:36:15.711 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:36:15.762 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:36:16.266 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:36:16.276 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:36:16.277 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:36:16.278 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:36:16.379 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:36:16.382 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1237 ms
-2023-04-02 21:36:16.512 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:36:16.551 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:36:16.767 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:36:17.036 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@362a6aa5
-2023-04-02 21:36:17.038 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:36:17.083 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:36:17.741 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:36:17.748 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:36:18.114 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:36:18.736 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:36:18.755 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:36:18.762 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.92 seconds (process running for 4.356)
-2023-04-02 21:36:57.248 INFO  [background-preinit] o.h.v.i.u.Version - HV000001: Hibernate Validator 8.0.0.Final
-2023-04-02 21:36:57.290 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 14064 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
-2023-04-02 21:36:57.292 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
-2023-04-02 21:36:57.794 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
-2023-04-02 21:36:57.837 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 39 ms. Found 3 JPA repository interfaces.
-2023-04-02 21:36:58.267 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
-2023-04-02 21:36:58.277 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:36:58.278 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
-2023-04-02 21:36:58.278 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
-2023-04-02 21:36:58.379 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
-2023-04-02 21:36:58.381 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1047 ms
-2023-04-02 21:36:58.510 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
-2023-04-02 21:36:58.548 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
-2023-04-02 21:36:58.757 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
-2023-04-02 21:36:58.991 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@52f43225
-2023-04-02 21:36:58.993 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
-2023-04-02 21:36:59.037 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
-2023-04-02 21:36:59.655 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
-2023-04-02 21:36:59.662 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:37:00.052 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
-2023-04-02 21:37:00.845 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
-2023-04-02 21:37:00.884 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
-2023-04-02 21:37:00.895 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 3.868 seconds (process running for 4.31)
-2023-04-02 21:37:06.288 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
-2023-04-02 21:37:06.288 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
-2023-04-02 21:37:06.290 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
-2023-04-02 21:37:06.776 INFO  [http-nio-8080-exec-4] o.s.a.AbstractOpenApiResource - Init duration for springdoc-openapi is: 219 ms
-2023-04-02 21:37:31.796 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 21:37:31.796 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - RequestBody ==>Name ==> string Email ==> string Password ==> string 
-2023-04-02 21:37:31.796 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>string
-2023-04-02 21:37:31.806 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 21:37:46.984 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 21:37:46.984 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico@gmail.com Password ==> Password132 
-2023-04-02 21:37:46.984 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - Phone ==>555
-2023-04-02 21:37:46.984 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - Phone ==>5526
-2023-04-02 21:38:05.178 WARN  [http-nio-8080-exec-2] o.s.w.s.m.s.DefaultHandlerExceptionResolver - Resolved [org.springframework.web.bind.MissingRequestHeaderException: Required request header 'Authorization' for method parameter type String is not present]
-2023-04-02 21:38:22.403 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 21:38:22.403 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico1@gmail.com Password ==> Password132 
-2023-04-02 21:38:22.403 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - Phone ==>555
-2023-04-02 21:38:22.403 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - Phone ==>5526
-2023-04-02 21:38:26.343 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 21:38:26.343 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico1gmail.com Password ==> Password132 
-2023-04-02 21:38:26.343 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>555
-2023-04-02 21:38:26.343 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - Phone ==>5526
-2023-04-02 21:38:26.344 WARN  [http-nio-8080-exec-1] c.p.s.c.userController - Formato de correo electrónico inválido
-2023-04-02 21:38:29.853 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> createUser
-2023-04-02 21:38:29.854 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico1@gmail.com Password ==> assword132 
-2023-04-02 21:38:29.854 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>555
-2023-04-02 21:38:29.854 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>5526
-2023-04-02 21:38:29.855 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Formato de clave inválido
-2023-04-02 21:38:48.953 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 21:38:48.953 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIuU3VuIEFwciAwMiAyMTowNjowNCBDTFQgMjAyMyJ9.7fn6bGq3U6I0VZDgSJQ69Q3lyQhHELAwLGnOqL1HIc-NzrNnZfdFwBn9sOINTlXwas_PIQwmGfOtRnSYQeuSRA Id  ==> 4 
-2023-04-02 21:38:48.969 WARN  [http-nio-8080-exec-2] c.p.s.c.userController - Token invalido
-2023-04-02 21:38:52.226 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> searchUser
-2023-04-02 21:38:52.226 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIxOjM3OjQ3IENMVCAyMDIzIn0.PlzYu2ymrmw25AbVmjXhtbKsAUMaqLo4sRE0Te3wCv90gWOPwRgqieE-AQI45M2j4frlCxC4bOrsKJPmOV37vg Id  ==> 4 
-2023-04-02 21:39:00.504 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 21:39:00.504 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIuU3VuIEFwciAwMiAyMTowNjowNCBDTFQgMjAyMyJ9.7fn6bGq3U6I0VZDgSJQ69Q3lyQhHELAwLGnOqL1HIc-NzrNnZfdFwBn9sOINTlXwas_PIQwmGfOtRnSYQeuSRA Id  ==> 4 
-2023-04-02 21:39:00.509 WARN  [http-nio-8080-exec-3] c.p.s.c.userController - Token invalido
-2023-04-02 21:39:03.477 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 21:39:03.478 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIxOjM3OjQ3IENMVCAyMDIzIn0.PlzYu2ymrmw25AbVmjXhtbKsAUMaqLo4sRE0Te3wCv90gWOPwRgqieE-AQI45M2j4frlCxC4bOrsKJPmOV37vg Id  ==> 4 
-2023-04-02 21:39:05.251 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> deleteUser
-2023-04-02 21:39:05.251 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEzMi5TdW4gQXByIDAyIDIxOjM3OjQ3IENMVCAyMDIzIn0.PlzYu2ymrmw25AbVmjXhtbKsAUMaqLo4sRE0Te3wCv90gWOPwRgqieE-AQI45M2j4frlCxC4bOrsKJPmOV37vg Id  ==> 4 
-2023-04-02 21:39:05.255 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Usuario no encontrado
-2023-04-02 21:39:15.783 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:39:15.784 INFO  [http-nio-8080-exec-6] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbmljYWVAZ21haWwuY29tLlBhc3N3b3JkMTIxMnNkc2EuU3VuIEFwciAwMiAyMDo1ODoyMSBDTFQgMjAyMyJ9.-LNlr_sGJqyUaNqrt7pyIfxGIZZye08Oo8eKH609VzLrxJ-lv8bh-AYcRJYz3P80kM5UBS12ofNB0TX5gm69Iw Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
-2023-04-02 21:39:15.789 WARN  [http-nio-8080-exec-6] c.p.s.c.userController - Token invalido
-2023-04-02 21:39:20.218 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:39:20.219 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuU3VuIEFwciAwMiAyMTozODoyMiBDTFQgMjAyMyJ9.iqdZmT2oX9R2RdpgfPSVoRlvhlllFNEAKBE1TzcnBcRlVNntn8AkCxu3Fx-fbBTa-ZbrX-6uNeo7DAHnQNEGgg Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
-2023-04-02 21:39:25.208 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> updateUser
-2023-04-02 21:39:25.208 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuU3VuIEFwciAwMiAyMTozODoyMiBDTFQgMjAyMyJ9.iqdZmT2oX9R2RdpgfPSVoRlvhlllFNEAKBE1TzcnBcRlVNntn8AkCxu3Fx-fbBTa-ZbrX-6uNeo7DAHnQNEGgg Id  ==> 5 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
-2023-04-02 21:39:25.214 WARN  [http-nio-8080-exec-4] c.p.s.c.userController - Token invalido
-2023-04-02 21:39:28.396 INFO  [SpringApplicationShutdownHook] o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
-2023-04-02 21:39:28.398 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown initiated...
-2023-04-02 21:39:28.402 INFO  [SpringApplicationShutdownHook] c.z.h.HikariDataSource - HikariPool-1 - Shutdown completed.
+2023-04-03 10:26:51.799 INFO  [background-preinit] o.h.v.i.u.Version - HV000001: Hibernate Validator 8.0.0.Final
+2023-04-03 10:26:51.837 INFO  [main] c.p.s.ServicioAvlaChileApplication - Starting ServicioAvlaChileApplication using Java 17.0.6 with PID 11100 (X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile\target\classes started by nicol in X:\04-CURSO SPRING BOOT\TEST1\servicio-avla-chile)
+2023-04-03 10:26:51.839 INFO  [main] c.p.s.ServicioAvlaChileApplication - No active profile set, falling back to 1 default profile: "default"
+2023-04-03 10:26:52.490 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-03 10:26:52.541 INFO  [main] o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 3 JPA repository interfaces.
+2023-04-03 10:26:53.006 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2023-04-03 10:26:53.016 INFO  [main] o.a.c.h.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2023-04-03 10:26:53.017 INFO  [main] o.a.c.c.StandardService - Starting service [Tomcat]
+2023-04-03 10:26:53.018 INFO  [main] o.a.c.c.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.7]
+2023-04-03 10:26:53.119 INFO  [main] o.a.c.c.C.[.[.[/] - Initializing Spring embedded WebApplicationContext
+2023-04-03 10:26:53.121 INFO  [main] o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1243 ms
+2023-04-03 10:26:53.256 INFO  [main] o.h.j.i.u.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-03 10:26:53.294 INFO  [main] o.h.Version - HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-04-03 10:26:53.503 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Starting...
+2023-04-03 10:26:53.757 INFO  [main] c.z.h.p.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@4e2109fe
+2023-04-03 10:26:53.759 INFO  [main] c.z.h.HikariDataSource - HikariPool-1 - Start completed.
+2023-04-03 10:26:53.805 INFO  [main] SQL dialect - HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-04-03 10:26:54.423 INFO  [main] o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-03 10:26:54.430 INFO  [main] o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-03 10:26:54.812 WARN  [main] o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-03 10:26:55.649 INFO  [main] o.a.c.h.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2023-04-03 10:26:55.669 INFO  [main] o.s.b.w.e.t.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-03 10:26:55.677 INFO  [main] c.p.s.ServicioAvlaChileApplication - Started ServicioAvlaChileApplication in 4.09 seconds (process running for 4.545)
+2023-04-03 10:27:09.603 INFO  [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-03 10:27:09.603 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2023-04-03 10:27:09.604 INFO  [http-nio-8080-exec-2] o.s.w.s.DispatcherServlet - Completed initialization in 1 ms
+2023-04-03 10:27:09.691 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> createUser
+2023-04-03 10:27:09.691 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico1@gmail.com Password ==> Password132 
+2023-04-03 10:27:09.692 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - Phone ==>555
+2023-04-03 10:27:09.692 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - Phone ==>5526
+2023-04-03 10:27:25.035 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> createUser
+2023-04-03 10:27:25.035 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico1@gmail Password ==> assword132 
+2023-04-03 10:27:25.035 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - Phone ==>555
+2023-04-03 10:27:25.036 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - Phone ==>5526
+2023-04-03 10:27:25.036 WARN  [http-nio-8080-exec-3] c.p.s.c.userController - Formato de correo electrónico inválido
+2023-04-03 10:27:32.966 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> createUser
+2023-04-03 10:27:32.966 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico12@gmail.com Password ==> assword132 
+2023-04-03 10:27:32.966 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>555
+2023-04-03 10:27:32.966 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - Phone ==>5526
+2023-04-03 10:27:32.967 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Formato de clave inválido
+2023-04-03 10:27:36.883 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> createUser
+2023-04-03 10:27:36.883 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - RequestBody ==>Name ==> Nicolas Email ==> nico12@gmail.com Password ==> Password132 
+2023-04-03 10:27:36.883 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - Phone ==>555
+2023-04-03 10:27:36.884 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - Phone ==>5526
+2023-04-03 10:27:52.221 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - METODO ==> searchUser
+2023-04-03 10:27:52.222 INFO  [http-nio-8080-exec-8] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuTW9uIEFwciAwMyAxMDoyNzowOSBDTFQgMjAyMyJ9.BMNjpx-EfVaHUamQuco7ix1Grj5CkFVQUGxaie6w-2WNW9LtYEZHcGHhud3nxTobruSZxI-nexzE0GGWwGmzyA Id  ==> 8 
+2023-04-03 10:27:52.245 WARN  [http-nio-8080-exec-8] c.p.s.c.userController - Token invalido
+2023-04-03 10:27:55.540 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> searchUser
+2023-04-03 10:27:55.541 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuTW9uIEFwciAwMyAxMDoyNzowOSBDTFQgMjAyMyJ9.BMNjpx-EfVaHUamQuco7ix1Grj5CkFVQUGxaie6w-2WNW9LtYEZHcGHhud3nxTobruSZxI-nexzE0GGWwGmzyA Id  ==> 8 
+2023-04-03 10:27:55.547 WARN  [http-nio-8080-exec-9] c.p.s.c.userController - Token invalido
+2023-04-03 10:27:59.512 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - METODO ==> searchUser
+2023-04-03 10:27:59.512 INFO  [http-nio-8080-exec-10] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuTW9uIEFwciAwMyAxMDoyNzowOSBDTFQgMjAyMyJ9.BMNjpx-EfVaHUamQuco7ix1Grj5CkFVQUGxaie6w-2WNW9LtYEZHcGHhud3nxTobruSZxI-nexzE0GGWwGmzyA Id  ==> 7 
+2023-04-03 10:28:09.320 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - METODO ==> deleteUser
+2023-04-03 10:28:09.321 INFO  [http-nio-8080-exec-1] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuTW9uIEFwciAwMyAxMDoyNzowOSBDTFQgMjAyMyJ9.BMNjpx-EfVaHUamQuco7ix1Grj5CkFVQUGxaie6w-2WNW9LtYEZHcGHhud3nxTobruSZxI-nexzE0GGWwGmzyA Id  ==> 7 
+2023-04-03 10:28:11.454 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - METODO ==> deleteUser
+2023-04-03 10:28:11.454 INFO  [http-nio-8080-exec-2] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuTW9uIEFwciAwMyAxMDoyNzowOSBDTFQgMjAyMyJ9.BMNjpx-EfVaHUamQuco7ix1Grj5CkFVQUGxaie6w-2WNW9LtYEZHcGHhud3nxTobruSZxI-nexzE0GGWwGmzyA Id  ==> 7 
+2023-04-03 10:28:11.458 WARN  [http-nio-8080-exec-2] c.p.s.c.userController - Usuario no encontrado
+2023-04-03 10:28:27.692 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - METODO ==> updateUser
+2023-04-03 10:28:27.692 INFO  [http-nio-8080-exec-3] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMUBnbWFpbC5jb20uUGFzc3dvcmQxMzIuU3VuIEFwciAwMiAyMTozODoyMiBDTFQgMjAyMyJ9.iqdZmT2oX9R2RdpgfPSVoRlvhlllFNEAKBE1TzcnBcRlVNntn8AkCxu3Fx-fbBTa-ZbrX-6uNeo7DAHnQNEGgg Id  ==> 8 RequestBody ==>  Name ==> NicolasJoraageAndres Email ==> anicae@gmail.com Password ==> Password12 
+2023-04-03 10:28:27.698 WARN  [http-nio-8080-exec-3] c.p.s.c.userController - Token invalido
+2023-04-03 10:28:46.786 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - METODO ==> updateUser
+2023-04-03 10:28:46.786 INFO  [http-nio-8080-exec-4] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvMTJAZ21haWwuY29tLlBhc3N3b3JkMTMyLk1vbiBBcHIgMDMgMTA6Mjc6MzYgQ0xUIDIwMjMifQ.LLC7Sw8egQgchXfRiJtBELSH1mc-8l_HNnjjHaCukC9XD-RM1OC7msx9dSBD0P7fcgdTS72fZ-0LuUdadgDekQ Id  ==> 8 RequestBody ==>  Name ==> NicolasJorgeAndres Email ==> nico@gmail.com Password ==> Password12 
+2023-04-03 10:28:59.878 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - METODO ==> updateUser
+2023-04-03 10:28:59.878 INFO  [http-nio-8080-exec-5] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEyLk1vbiBBcHIgMDMgMTA6Mjg6NDYgQ0xUIDIwMjMifQ.0bOoucd3VRNH5GI_uaPHYPIut6U0KibMcS8Vl2GtsVaD2xTKrlMOmz9ScJ4dV3I-pP9pcFQ5nCQX9VrYuTZqdw Id  ==> 8 RequestBody ==>  Name ==> NicolasJorgeAndres Email ==> nico@gmail. Password ==> assword12 
+2023-04-03 10:28:59.878 WARN  [http-nio-8080-exec-5] c.p.s.c.userController - Formato de correo electrónico inválido
+2023-04-03 10:29:04.693 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - METODO ==> updateUser
+2023-04-03 10:29:04.694 INFO  [http-nio-8080-exec-7] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEyLk1vbiBBcHIgMDMgMTA6Mjg6NDYgQ0xUIDIwMjMifQ.0bOoucd3VRNH5GI_uaPHYPIut6U0KibMcS8Vl2GtsVaD2xTKrlMOmz9ScJ4dV3I-pP9pcFQ5nCQX9VrYuTZqdw Id  ==> 8 RequestBody ==>  Name ==> NicolasJorgeAndres Email ==> nico@gmail.com Password ==> assword12 
+2023-04-03 10:29:04.694 WARN  [http-nio-8080-exec-7] c.p.s.c.userController - Formato de clave inválido
+2023-04-03 10:29:06.792 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - METODO ==> updateUser
+2023-04-03 10:29:06.793 INFO  [http-nio-8080-exec-9] c.p.s.c.userController - ==> Token ==> Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJuaWNvQGdtYWlsLmNvbS5QYXNzd29yZDEyLk1vbiBBcHIgMDMgMTA6Mjg6NDYgQ0xUIDIwMjMifQ.0bOoucd3VRNH5GI_uaPHYPIut6U0KibMcS8Vl2GtsVaD2xTKrlMOmz9ScJ4dV3I-pP9pcFQ5nCQX9VrYuTZqdw Id  ==> 8 RequestBody ==>  Name ==> NicolasJorgeAndres Email ==> nico@gmail.com Password ==> Password12 
